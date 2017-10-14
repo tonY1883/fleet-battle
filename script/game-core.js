@@ -2197,8 +2197,16 @@ function showEndGameDialog(title, description) {
 
 		}
 	}, 3000);
+}
 
-
+function showStageBox(stageText, time) {
+	document.getElementById('info-text').innerHTML = stageText;
+	document.getElementById('stage-box').style.height = "100vh";
+	document.getElementById("stage-box-content").style.top = "0";
+	setTimeout(function () {
+		document.getElementById("stage-box-content").style.top = "-500px";
+		document.getElementById('stage-box').style.height = "0";
+	}, time);
 }
 
 function surrender(evt) {
