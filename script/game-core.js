@@ -923,6 +923,7 @@ function aerialCombat() {
 	if (first == PLAYER_1) {
 		acting_player = PLAYER_1;
 		promptAction();
+		showStageBox(string.game_stage_aerial_prompt_player);
 		player_1_attack_count = player_1_ships_count[SHIP_CLASS_CV] * 2;
 		if (player_1_attack_count > 0) {
 			beginTargeting();
@@ -933,6 +934,7 @@ function aerialCombat() {
 	} else {
 		acting_player = PLAYER_2;
 		promptAction();
+		showStageBox(string.game_stage_aerial_prompt_enemy);
 		player_2_attack_count = player_2_ships_count[SHIP_CLASS_CV] * 2;
 		if (player_2_attack_count > 0) {
 			attackMain();
@@ -946,6 +948,7 @@ function aerialCombat() {
 function startFleetCombat() {
 	game_phase = GAME_PHASE_COMBAT;
 	document.getElementById("stage").innerHTML = string.game_stage_artillery;
+	showStageBox(string.game_stage_artillery_prompt);
 	switch (game_mode) {
 		case GAME_MODE_SKIRMISH:
 		case GAME_MODE_INTERCEPT:
@@ -1900,6 +1903,7 @@ function nextPlayer() {
 					player_1_acted = true;
 					player_2_attack_count = player_2_ships_count[SHIP_CLASS_CV] * 2;
 					if (player_2_attack_count > 0 && !player_2_acted) {
+						showStageBox(string.game_stage_aerial_prompt_enemy);
 						attackMain();
 					} else {
 						//well both acted. let's move to next stage.
@@ -2025,6 +2029,7 @@ function nextPlayer() {
 					player_2_acted = true;
 					player_1_attack_count = player_1_ships_count[SHIP_CLASS_CV] * 2;
 					if (player_1_attack_count > 0 && !player_1_acted) {
+						showStageBox(string.game_stage_aerial_prompt_player);
 						beginTargeting();
 					} else {
 						startFleetCombat();
@@ -2199,14 +2204,21 @@ function showEndGameDialog(title, description) {
 	}, 3000);
 }
 
-function showStageBox(stageText, time) {
+function showStageBox(stageText, duration) {
+	if (!duration) {
+		duration = 3500;
+	}
 	document.getElementById('info-text').innerHTML = stageText;
 	document.getElementById('stage-box').style.height = "100vh";
+	document.getElementById('stage-box').style.display = "table";
 	document.getElementById("stage-box-content").style.top = "0";
 	setTimeout(function () {
 		document.getElementById("stage-box-content").style.top = "-500px";
+	}, duration);
+	setTimeout(function () {
+		document.getElementById('stage-box').style.display = "block";
 		document.getElementById('stage-box').style.height = "0";
-	}, time);
+	}, duration + 2000);
 }
 
 function surrender(evt) {

@@ -1,6 +1,7 @@
 #stage-box {
 	background-color: transparent;
-	height: 1px;
+	display: block;
+	height: 0;
 }
 
 .modal-content-info {

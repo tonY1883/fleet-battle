@@ -36,7 +36,10 @@ var string = {
 	"game_objective_breakthrough": "Break through enemy resistance",
 	"game_objective_convoy": "Escort the transport ships to their destination",
 	"game_stage_aerial": "AERIAL COMBAT",
+	"game_stage_aerial_prompt_player": "Attack wing, ready to launch!",
+	"game_stage_aerial_prompt_enemy": "Enemy aircraft sighted!",
 	"game_stage_artillery": "FLEET ACTION",
+	"game_stage_artillery_prompt": "Enemy in range!",
 	"form_of_engagement_label": "Form of Engagement",
 	"form_of_engagement": [
 		"Parallel",
