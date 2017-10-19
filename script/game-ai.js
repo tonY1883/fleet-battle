@@ -21,6 +21,10 @@ var AI_CONFIGURATION_ADVANCED = 2;
 var AI_CONFIGURATION_ALL_SEEING = 3;
 
 
+//Debug symbols
+var attackCount = 0;
+var attackHit = 0;
+
 /**
  * Codes for computer ship placing
  */
@@ -1120,6 +1124,8 @@ function attackAllSeeing() {
  * TODO can this be fixed?
  */
 function onAttackResult(hit) {
+	attackCount = attackCount + 1;
+	attackHit = attackHit + (hit ? 1 : 0);
 	lastHit = hit;
 	switch (ai_config) {
 		case AI_CONFIGURATION_BASIC:
@@ -1153,4 +1159,31 @@ function onAttackResult(hit) {
 		default:
 			onConfigError();
 	}
+}
+
+/**
+ * Debug method - not called in the script
+ */
+function getAIStatistic() {
+	var ai;
+	switch (ai_config) {
+		case AI_CONFIGURATION_BASIC:
+			ai = "Inferior";
+			break;
+		case AI_CONFIGURATION_INTERMEDIATE:
+			ai = "Equivalent";
+			break;
+		case AI_CONFIGURATION_ADVANCED:
+			ai = "Superior";
+			break;
+		case AI_CONFIGURATION_ALL_SEEING:
+			ai = "Overwhelming";
+			break;
+		default:
+			onConfigError();
+	}
+	console.log("Current AI: " + ai);
+	console.log("Attack launched: " + attackCount);
+	console.log("Attack hit: " + attackHit);
+
 }
