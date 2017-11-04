@@ -102,7 +102,7 @@ function shipPlacableAi(x, y, type, course) {
 		if ((x + ship_size) < map_size && y < map_size) {
 			//check if another ship already exsist
 			for (var i = 0; i < ship_size; i++) {
-				if (document.getElementById("monitorRight").querySelector("[x='" + (x + i) + "'][y='" + y + "']").hasAttribute("placed")) {
+				if (getMonitorGrid("monitorRight", (x + i), y).hasAttribute("placed")) {
 					return false;
 				}
 			}
@@ -113,7 +113,7 @@ function shipPlacableAi(x, y, type, course) {
 	} else if (course == SHIP_COURSE_HORIZONTAL) {
 		if ((y + ship_size) < map_size && x < map_size) {
 			for (var i = 0; i < ship_size; i++) {
-				if (document.getElementById("monitorRight").querySelector("[y='" + (y + i) + "'][x='" + x + "']").hasAttribute("placed")) {
+				if (getMonitorGrid("monitorRight", x, (y + i)).hasAttribute("placed")) {
 					return false;
 				}
 			}
@@ -137,7 +137,7 @@ function shipPlacementBasic() {
 		//place the ship
 		if (course == SHIP_COURSE_VERTICAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[x='" + (x + i) + "'][y='" + y + "']");
+				var tGrid = getMonitorGrid("monitorRight", (x + i), y);
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -153,7 +153,7 @@ function shipPlacementBasic() {
 			}
 		} else if (course == SHIP_COURSE_HORIZONTAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[y='" + (y + i) + "'][x='" + x + "']");
+				var tGrid = getMonitorGrid("monitorRight", x, (y + i));
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -232,7 +232,7 @@ function shipPlacementIntermediate() {
 	if (shipPlacableAi(x, y, type, course)) {
 		if (course == SHIP_COURSE_VERTICAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[x='" + (x + i) + "'][y='" + y + "']");
+				var tGrid = getMonitorGrid("monitorRight", (x + i), y);
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -248,7 +248,7 @@ function shipPlacementIntermediate() {
 			}
 		} else if (course == SHIP_COURSE_HORIZONTAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[y='" + (y + i) + "'][x='" + x + "']");
+				var tGrid = getMonitorGrid("monitorRight", x, (y + i));
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -334,7 +334,7 @@ function shipPlacementAdvanced() {
 	if (shipPlacableAi(x, y, type, course)) {
 		if (course == SHIP_COURSE_VERTICAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[x='" + (x + i) + "'][y='" + y + "']");
+				var tGrid = getMonitorGrid("monitorRight", (x + i), y);
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -350,7 +350,7 @@ function shipPlacementAdvanced() {
 			}
 		} else if (course == SHIP_COURSE_HORIZONTAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[y='" + (y + i) + "'][x='" + x + "']");
+				var tGrid = getMonitorGrid("monitorRight", x, (y + i));
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -449,7 +449,7 @@ function attackBasic() {
 		}
 		switch (d) {
 			case 0:
-				if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+				if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 					x = lastHitCoorX + 1;
 					y = lastHitCoorY;
 				} else {
@@ -460,7 +460,7 @@ function attackBasic() {
 
 				break;
 			case 1:
-				if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+				if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 					x = lastHitCoorX - 1;
 					y = lastHitCoorY;
 				} else {
@@ -470,7 +470,7 @@ function attackBasic() {
 				}
 				break;
 			case 2:
-				if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+				if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 					y = lastHitCoorY - 1;
 					x = lastHitCoorX;
 				} else {
@@ -480,7 +480,7 @@ function attackBasic() {
 				}
 				break;
 			case 3:
-				if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+				if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 					y = lastHitCoorY + 1;
 					x = lastHitCoorX;
 				} else {
@@ -498,7 +498,7 @@ function attackBasic() {
 	}
 
 	//see if available
-	var tGrid = document.getElementById("monitorLeft").querySelector("[y='" + y + "'][x='" + x + "']");
+	var tGrid = getMonitorGrid("monitorLeft", x, y);
 	if (tGrid == null || tGrid.hasAttribute("sunk")) {
 		//current target destroyed
 		lastHit = false;
@@ -536,7 +536,7 @@ function attackIntermediate() {
 			}
 			switch (d) {
 				case 0:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					} else {
@@ -548,7 +548,7 @@ function attackIntermediate() {
 
 					break;
 				case 1:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					} else {
@@ -559,7 +559,7 @@ function attackIntermediate() {
 					}
 					break;
 				case 2:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 						y = lastHitCoorY - 1;
 						x = lastHitCoorX;
 					} else {
@@ -570,7 +570,7 @@ function attackIntermediate() {
 					}
 					break;
 				case 3:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 						y = lastHitCoorY + 1;
 						x = lastHitCoorX;
 					} else {
@@ -588,7 +588,7 @@ function attackIntermediate() {
 				d = RNG(0, 3);
 				switch (d) {
 					case 0:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+						if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 							x = lastHitCoorX + 1;
 							y = lastHitCoorY;
 						} else {
@@ -600,7 +600,7 @@ function attackIntermediate() {
 
 						break;
 					case 1:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+						if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 							x = lastHitCoorX - 1;
 							y = lastHitCoorY;
 						} else {
@@ -611,7 +611,7 @@ function attackIntermediate() {
 						}
 						break;
 					case 2:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+						if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 							y = lastHitCoorY - 1;
 							x = lastHitCoorX;
 						} else {
@@ -622,7 +622,7 @@ function attackIntermediate() {
 						}
 						break;
 					case 3:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+						if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 							y = lastHitCoorY + 1;
 							x = lastHitCoorX;
 						} else {
@@ -639,7 +639,7 @@ function attackIntermediate() {
 					//flip the direction
 					switch (d) {
 						case 0:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + lockedCoorY + "'][x='" + (lockedCoorX - 1) + "']") != null) {
+							if (getMonitorGrid("monitorLeft", (lockedCoorX - 1), lockedCoorY) !== null) {
 								x = lockedCoorX - 1;
 								y = lockedCoorY;
 								d = 1;
@@ -647,21 +647,21 @@ function attackIntermediate() {
 
 							break;
 						case 1:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + lockedCoorY + "'][x='" + (lockedCoorX + 1) + "']") != null) {
+							if (getMonitorGrid("monitorLeft", (lockedCoorX + 1), lockedCoorY) !== null) {
 								x = lockedCoorX + 1;
 								y = lockedCoorY;
 								d = 0;
 							}
 							break;
 						case 2:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + (lockedCoorY + 1) + "'][x='" + lockedCoorX + "']") != null) {
+							if (getMonitorGrid("monitorLeft", lockedCoorX, (lockedCoorY + 1)) !== null) {
 								y = lockedCoorY + 1;
 								x = lockedCoorX;
 								d = 3;
 							}
 							break;
 						case 3:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + (lockedCoorY - 1) + "'][x='" + lockedCoorX + "']") != null) {
+							if (getMonitorGrid("monitorLeft", lockedCoorX, (lockedCoorY - 1)) !== null) {
 								y = lockedCoorY - 1;
 								x = lockedCoorX;
 								d = 2;
@@ -707,7 +707,7 @@ function attackIntermediate() {
 			d = RNG(0, 3);
 			switch (d) {
 				case 0:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					} else {
@@ -718,7 +718,7 @@ function attackIntermediate() {
 
 					break;
 				case 1:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					} else {
@@ -728,7 +728,7 @@ function attackIntermediate() {
 					}
 					break;
 				case 2:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 						y = lastHitCoorY - 1;
 						x = lastHitCoorX;
 					} else {
@@ -738,7 +738,7 @@ function attackIntermediate() {
 					}
 					break;
 				case 3:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 						y = lastHitCoorY + 1;
 						x = lastHitCoorX;
 					} else {
@@ -765,7 +765,7 @@ function attackIntermediate() {
 	}
 
 	//see if available
-	var tGrid = document.getElementById("monitorLeft").querySelector("[y='" + y + "'][x='" + x + "']");
+	var tGrid = getMonitorGrid("monitorLeft", x, y);
 	if (tGrid == null || tGrid.hasAttribute("sunk") || (!target_locked && tGrid.hasAttribute("hit"))) {
 		//if no, do it again
 		attackIntermediate();
@@ -796,7 +796,7 @@ function attackAdvanced() {
 			}
 			switch (d) {
 				case 0:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					} else {
@@ -808,7 +808,7 @@ function attackAdvanced() {
 
 					break;
 				case 1:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					} else {
@@ -819,7 +819,7 @@ function attackAdvanced() {
 					}
 					break;
 				case 2:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 						y = lastHitCoorY - 1;
 						x = lastHitCoorX;
 					} else {
@@ -830,7 +830,7 @@ function attackAdvanced() {
 					}
 					break;
 				case 3:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 						y = lastHitCoorY + 1;
 						x = lastHitCoorX;
 					} else {
@@ -848,7 +848,7 @@ function attackAdvanced() {
 				d = RNG(0, 3);
 				switch (d) {
 					case 0:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+						if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 							x = lastHitCoorX + 1;
 							y = lastHitCoorY;
 						} else {
@@ -860,7 +860,7 @@ function attackAdvanced() {
 
 						break;
 					case 1:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+						if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 							x = lastHitCoorX - 1;
 							y = lastHitCoorY;
 						} else {
@@ -871,7 +871,7 @@ function attackAdvanced() {
 						}
 						break;
 					case 2:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+						if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 							y = lastHitCoorY - 1;
 							x = lastHitCoorX;
 						} else {
@@ -882,7 +882,7 @@ function attackAdvanced() {
 						}
 						break;
 					case 3:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+						if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 							y = lastHitCoorY + 1;
 							x = lastHitCoorX;
 						} else {
@@ -899,7 +899,7 @@ function attackAdvanced() {
 					//flip the direction
 					switch (d) {
 						case 0:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + lockedCoorY + "'][x='" + (lockedCoorX - 1) + "']") != null) {
+							if (getMonitorGrid("monitorLeft", (lockedCoorX - 1), lockedCoorY) !== null) {
 								x = lockedCoorX - 1;
 								y = lockedCoorY;
 								d = 1;
@@ -907,21 +907,21 @@ function attackAdvanced() {
 
 							break;
 						case 1:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + lockedCoorY + "'][x='" + (lockedCoorX + 1) + "']") != null) {
+							if (getMonitorGrid("monitorLeft", (lockedCoorX + 1), lockedCoorY) !== null) {
 								x = lockedCoorX + 1;
 								y = lockedCoorY;
 								d = 0;
 							}
 							break;
 						case 2:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + (lockedCoorY + 1) + "'][x='" + lockedCoorX + "']") != null) {
+							if (getMonitorGrid("monitorLeft", lockedCoorX, (lockedCoorY + 1)) !== null) {
 								y = lockedCoorY + 1;
 								x = lockedCoorX;
 								d = 3;
 							}
 							break;
 						case 3:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + (lockedCoorY - 1) + "'][x='" + lockedCoorX + "']") != null) {
+							if (getMonitorGrid("monitorLeft", lockedCoorX, (lockedCoorY - 1)) !== null) {
 								y = lockedCoorY - 1;
 								x = lockedCoorX;
 								d = 2;
@@ -967,7 +967,7 @@ function attackAdvanced() {
 			d = RNG(0, 3);
 			switch (d) {
 				case 0:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					} else {
@@ -978,7 +978,7 @@ function attackAdvanced() {
 
 					break;
 				case 1:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					} else {
@@ -988,7 +988,7 @@ function attackAdvanced() {
 					}
 					break;
 				case 2:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 						y = lastHitCoorY - 1;
 						x = lastHitCoorX;
 					} else {
@@ -998,7 +998,7 @@ function attackAdvanced() {
 					}
 					break;
 				case 3:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 						y = lastHitCoorY + 1;
 						x = lastHitCoorX;
 					} else {
@@ -1063,7 +1063,7 @@ function attackAdvanced() {
 	}
 
 	//see if available
-	var tGrid = document.getElementById("monitorLeft").querySelector("[y='" + y + "'][x='" + x + "']");
+	var tGrid = getMonitorGrid("monitorLeft", x, y);
 	if (tGrid == null || tGrid.hasAttribute("sunk") || (!target_locked && tGrid.hasAttribute("hit"))) {
 		//if no, do it again
 		attackIntermediate();
