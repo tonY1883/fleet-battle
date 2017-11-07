@@ -1752,6 +1752,10 @@ function shipDestroyed(map, x, y) {
 			ship_size = 2;
 			criticalDamage = 1;
 			break;
+		case SHIP_CLASS_AP:
+			ship_size = 3;
+			criticalDamage = 1;
+			break;
 	}
 	if (bearing == SHIP_COURSE_VERTICAL) {
 		for (var i = 0; i < ship_size; i++) {
