@@ -784,7 +784,7 @@ function attackIntermediate() {
  * Targeting code for the Advanced AI
  */
 var probMap = new Array();
-var targetSunkCount = [0, 0, 0, 0];
+var targetSunkCount = [0, 0, 0, 0, 0];
 
 //TODO guess next ship base on distribution of known ships. Possible?
 function attackAdvanced() {
@@ -846,9 +846,13 @@ function attackAdvanced() {
 			}
 
 		} else if (lastLastHit) {
-			if (hitCount < 2) {
+			if (hitCount < 4) {
 				//wrong direction
-				d = RNG(0, 3);
+				d++;
+				if (d > 3) {
+					d = 0;
+				}
+
 				switch (d) {
 					case 0:
 						if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
@@ -897,77 +901,44 @@ function attackAdvanced() {
 						break;
 				}
 			} else {
-				//MUST.BE.NEAR.BY!
-				if (hitCount < 4) {
-					//flip the direction
-					switch (d) {
-						case 0:
-							if (getMonitorGrid("monitorLeft", (lockedCoorX - 1), lockedCoorY) !== null) {
-								x = lockedCoorX - 1;
-								y = lockedCoorY;
-								d = 1;
-							}
-
-							break;
-						case 1:
-							if (getMonitorGrid("monitorLeft", (lockedCoorX + 1), lockedCoorY) !== null) {
-								x = lockedCoorX + 1;
-								y = lockedCoorY;
-								d = 0;
-							}
-							break;
-						case 2:
-							if (getMonitorGrid("monitorLeft", lockedCoorX, (lockedCoorY + 1)) !== null) {
-								y = lockedCoorY + 1;
-								x = lockedCoorX;
-								d = 3;
-							}
-							break;
-						case 3:
-							if (getMonitorGrid("monitorLeft", lockedCoorX, (lockedCoorY - 1)) !== null) {
-								y = lockedCoorY - 1;
-								x = lockedCoorX;
-								d = 2;
-							}
-							break;
-					}
-				} else {
-					//probaly a battleship. try to hit it twice in every sector.
-					//which means we simply flip the dirction and don't touch the coordinates.
-					switch (d) {
-						case 0:
-							x = lastHitCoorX;
-							y = lastHitCoorY;
-							d = 1;
+				//probaly a battleship. try to hit it twice in every sector.
+				//which means we simply flip the dirction and don't touch the coordinates.
+				switch (d) {
+					case 0:
+						x = lastHitCoorX;
+						y = lastHitCoorY;
+						d = 1;
 
 
-							break;
-						case 1:
-							x = lastHitCoorX;
-							y = lastHitCoorY;
-							d = 0;
+						break;
+					case 1:
+						x = lastHitCoorX;
+						y = lastHitCoorY;
+						d = 0;
 
-							break;
-						case 2:
-							x = lastHitCoorX;
-							y = lastHitCoorY;
+						break;
+					case 2:
+						x = lastHitCoorX;
+						y = lastHitCoorY;
 
-							d = 3;
+						d = 3;
 
-							break;
-						case 3:
-							x = lastHitCoorX;
-							y = lastHitCoorY;
-							d = 2;
+						break;
+					case 3:
+						x = lastHitCoorX;
+						y = lastHitCoorY;
+						d = 2;
 
-							break;
-					}
+						break;
 				}
 
 			}
 		} else if (lastHitCoorX == lockedCoorX && lastHitCoorY == lockedCoorY) {
 			//wrong direction
-			d = RNG(0, 3);
+			d++;
+			if (d > 3) {
+				d = 0;
+			}
 			switch (d) {
 				case 0:
 					if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
@@ -975,6 +946,7 @@ function attackAdvanced() {
 						y = lastHitCoorY;
 					} else {
 						//flip direction
+						d = 1;
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					}
@@ -986,6 +958,7 @@ function attackAdvanced() {
 						y = lastHitCoorY;
 					} else {
 						//flip direction
+						d = 0;
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					}
@@ -996,6 +969,7 @@ function attackAdvanced() {
 						x = lastHitCoorX;
 					} else {
 						//flip direction
+						d = 3;
 						x = lastHitCoorX;
 						y = lastHitCoorY + 1;
 					}
@@ -1006,6 +980,7 @@ function attackAdvanced() {
 						x = lastHitCoorX;
 					} else {
 						//flip direction
+						d = 2;
 						x = lastHitCoorX;
 						y = lastHitCoorY - 1;
 					}
@@ -1199,65 +1174,73 @@ function updateProbMap() {
 		for (var r = 0; r < map_size; r++) {
 			for (var s = 0; s < getPlayerShipCount(PLAYER_1); s++) {
 				//Triple for loops. Fast enough, I guess.
-				if (targetSunkCount[SHIP_CLASS_BB] < max_bb_count) {
-					if (shipPossible(q, r, SHIP_CLASS_BB, SHIP_COURSE_HORIZONTAL)) {
-						probMap[q][r]++;
-					}
-				}
-				if (targetSunkCount[SHIP_CLASS_BB] < max_bb_count) {
-					if (shipPossible(q, r, SHIP_CLASS_BB, SHIP_COURSE_VERTICAL)) {
-						probMap[q][r]++;
-					}
-				}
-				if (targetSunkCount[SHIP_CLASS_CV] < max_cv_count) {
-					if (shipPossible(q, r, SHIP_CLASS_CV, SHIP_COURSE_HORIZONTAL)) {
-						probMap[q][r]++;
-					}
-				}
-				if (targetSunkCount[SHIP_CLASS_CV] < max_cv_count) {
-					if (shipPossible(q, r, SHIP_CLASS_CV, SHIP_COURSE_VERTICAL)) {
-						probMap[q][r]++;
-					}
-				}
-				if (targetSunkCount[SHIP_CLASS_CA] < max_ca_count) {
-					if (shipPossible(q, r, SHIP_CLASS_CA, SHIP_COURSE_HORIZONTAL)) {
-						probMap[q][r]++;
-					}
-				}
-				if (targetSunkCount[SHIP_CLASS_CA] < max_ca_count) {
-					if (shipPossible(q, r, SHIP_CLASS_CA, SHIP_COURSE_VERTICAL)) {
-						probMap[q][r]++;
-					}
-				}
-				if (targetSunkCount[SHIP_CLASS_DD] < max_dd_count) {
-					if (shipPossible(q, r, SHIP_CLASS_DD, SHIP_COURSE_HORIZONTAL)) {
-						probMap[q][r]++;
-					}
-				}
-				if (targetSunkCount[SHIP_CLASS_DD] < max_dd_count) {
-					if (shipPossible(q, r, SHIP_CLASS_DD, SHIP_COURSE_VERTICAL)) {
-						probMap[q][r]++;
-					}
-				}
-				if (game_mode === GAME_MODE_BREAKTHROUGH || game_mode === GAME_MODE_CONVOY) {
+				if (game_mode === GAME_MODE_CONVOY) {
 					if (targetSunkCount[SHIP_CLASS_AP] < max_ap_count) {
-						if (shipPossible(q, r, SHIP_CLASS_AP, SHIP_COURSE_HORIZONTAL)) {
+						if (shipExistPossible(q, r, SHIP_CLASS_AP, SHIP_COURSE_HORIZONTAL)) {
 							probMap[q][r]++;
 						}
 					}
 					if (targetSunkCount[SHIP_CLASS_AP] < max_ap_count) {
-						if (shipPossible(q, r, SHIP_CLASS_AP, SHIP_COURSE_VERTICAL)) {
+						if (shipExistPossible(q, r, SHIP_CLASS_AP, SHIP_COURSE_VERTICAL)) {
+							probMap[q][r]++;
+						}
+					}
+				} else if (game_mode === GAME_MODE_BREAKTHROUGH && SPECIFIC_CLASS_INTERCEPT_BREAKTHROUGH) {
+					if (shipExistPossible(q, r, ship_class_target, SHIP_COURSE_HORIZONTAL)) {
+						probMap[q][r]++;
+					}
+					if (shipExistPossible(q, r, ship_class_target, SHIP_COURSE_VERTICAL)) {
+						probMap[q][r]++;
+					}
+				} else {
+					if (targetSunkCount[SHIP_CLASS_BB] < max_bb_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_BB, SHIP_COURSE_HORIZONTAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_BB] < max_bb_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_BB, SHIP_COURSE_VERTICAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_CV] < max_cv_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_CV, SHIP_COURSE_HORIZONTAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_CV] < max_cv_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_CV, SHIP_COURSE_VERTICAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_CA] < max_ca_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_CA, SHIP_COURSE_HORIZONTAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_CA] < max_ca_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_CA, SHIP_COURSE_VERTICAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_DD] < max_dd_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_DD, SHIP_COURSE_HORIZONTAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_DD] < max_dd_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_DD, SHIP_COURSE_VERTICAL)) {
 							probMap[q][r]++;
 						}
 					}
 				}
-
 			}
 		}
 	}
 }
 
-function shipPossible(x, y, type, course) {
+function shipExistPossible(x, y, type, course) {
+	var ship_size;
 	switch (type) {
 		case SHIP_CLASS_BB:
 		case SHIP_CLASS_CV:
@@ -1268,6 +1251,9 @@ function shipPossible(x, y, type, course) {
 			break;
 		case SHIP_CLASS_DD:
 			ship_size = 2;
+			break;
+		case SHIP_CLASS_AP:
+			ship_size = 3;
 			break;
 	}
 	if (course === SHIP_COURSE_VERTICAL) {
