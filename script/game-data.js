@@ -111,91 +111,91 @@ var img_url = {
 	"ship_tiles": [
 		[
 			[
-				"img/tiles/BB/sector_1_normal.png",
-				"img/tiles/BB/sector_2_normal.png",
-				"img/tiles/BB/sector_3_normal.png",
-				"img/tiles/BB/sector_4_normal.png"
+				"img/tiles/default/BB/sector_1_normal.png",
+				"img/tiles/default/BB/sector_2_normal.png",
+				"img/tiles/default/BB/sector_3_normal.png",
+				"img/tiles/default/BB/sector_4_normal.png"
 			],
 			[
-				"img/tiles/BB/sector_1_hit.png",
-				"img/tiles/BB/sector_2_hit.png",
-				"img/tiles/BB/sector_3_hit.png",
-				"img/tiles/BB/sector_4_hit.png"
+				"img/tiles/default/BB/sector_1_hit.png",
+				"img/tiles/default/BB/sector_2_hit.png",
+				"img/tiles/default/BB/sector_3_hit.png",
+				"img/tiles/default/BB/sector_4_hit.png"
 			],
 			[
-				"img/tiles/BB/sector_1_sunk.png",
-				"img/tiles/BB/sector_2_sunk.png",
-				"img/tiles/BB/sector_3_sunk.png",
-				"img/tiles/BB/sector_4_sunk.png"
+				"img/tiles/default/BB/sector_1_sunk.png",
+				"img/tiles/default/BB/sector_2_sunk.png",
+				"img/tiles/default/BB/sector_3_sunk.png",
+				"img/tiles/default/BB/sector_4_sunk.png"
 			]
 		],
 		[
 			[
-				"img/tiles/CV/sector_1_normal.png",
-				"img/tiles/CV/sector_2_normal.png",
-				"img/tiles/CV/sector_3_normal.png",
-				"img/tiles/CV/sector_4_normal.png"
+				"img/tiles/default/CV/sector_1_normal.png",
+				"img/tiles/default/CV/sector_2_normal.png",
+				"img/tiles/default/CV/sector_3_normal.png",
+				"img/tiles/default/CV/sector_4_normal.png"
 			],
 			[
-				"img/tiles/CV/sector_1_hit.png",
-				"img/tiles/CV/sector_2_hit.png",
-				"img/tiles/CV/sector_3_hit.png",
-				"img/tiles/CV/sector_4_hit.png"
+				"img/tiles/default/CV/sector_1_hit.png",
+				"img/tiles/default/CV/sector_2_hit.png",
+				"img/tiles/default/CV/sector_3_hit.png",
+				"img/tiles/default/CV/sector_4_hit.png"
 			],
 			[
-				"img/tiles/CV/sector_1_sunk.png",
-				"img/tiles/CV/sector_2_sunk.png",
-				"img/tiles/CV/sector_3_sunk.png",
-				"img/tiles/CV/sector_4_sunk.png"
+				"img/tiles/default/CV/sector_1_sunk.png",
+				"img/tiles/default/CV/sector_2_sunk.png",
+				"img/tiles/default/CV/sector_3_sunk.png",
+				"img/tiles/default/CV/sector_4_sunk.png"
 			]
 		],
 		[
 			[
-				"img/tiles/CA/sector_1_normal.png",
-				"img/tiles/CA/sector_2_normal.png",
-				"img/tiles/CA/sector_3_normal.png"
+				"img/tiles/default/CA/sector_1_normal.png",
+				"img/tiles/default/CA/sector_2_normal.png",
+				"img/tiles/default/CA/sector_3_normal.png"
 			],
 			[
-				"img/tiles/CA/sector_1_hit.png",
-				"img/tiles/CA/sector_2_hit.png",
-				"img/tiles/CA/sector_3_hit.png"
+				"img/tiles/default/CA/sector_1_hit.png",
+				"img/tiles/default/CA/sector_2_hit.png",
+				"img/tiles/default/CA/sector_3_hit.png"
 			],
 			[
-				"img/tiles/CA/sector_1_sunk.png",
-				"img/tiles/CA/sector_2_sunk.png",
-				"img/tiles/CA/sector_3_sunk.png"
+				"img/tiles/default/CA/sector_1_sunk.png",
+				"img/tiles/default/CA/sector_2_sunk.png",
+				"img/tiles/default/CA/sector_3_sunk.png"
 			]
 		],
 		[
 			[
-				"img/tiles/DD/sector_1_normal.png",
-				"img/tiles/DD/sector_2_normal.png"
+				"img/tiles/default/DD/sector_1_normal.png",
+				"img/tiles/default/DD/sector_2_normal.png"
 			],
 			[
-				"img/tiles/DD/sector_1_hit.png",
-				"img/tiles/DD/sector_2_hit.png"
+				"img/tiles/default/DD/sector_1_hit.png",
+				"img/tiles/default/DD/sector_2_hit.png"
 			],
 			[
-				"img/tiles/DD/sector_1_sunk.png",
-				"img/tiles/DD/sector_2_sunk.png"
+				"img/tiles/default/DD/sector_1_sunk.png",
+				"img/tiles/default/DD/sector_2_sunk.png"
 			]
 
 		],
 		[
 			[
-				"img/tiles/AP/sector_1_normal.png",
-				"img/tiles/AP/sector_2_normal.png",
-				"img/tiles/AP/sector_3_normal.png"
+				"img/tiles/default/AP/sector_1_normal.png",
+				"img/tiles/default/AP/sector_2_normal.png",
+				"img/tiles/default/AP/sector_3_normal.png"
 			],
 			[
-				"img/tiles/AP/sector_1_hit.png",
-				"img/tiles/AP/sector_2_hit.png",
-				"img/tiles/AP/sector_3_hit.png"
+				"img/tiles/default/AP/sector_1_hit.png",
+				"img/tiles/default/AP/sector_2_hit.png",
+				"img/tiles/default/AP/sector_3_hit.png"
 			],
 			[
-				"img/tiles/AP/sector_1_sunk.png",
-				"img/tiles/AP/sector_2_sunk.png",
-				"img/tiles/AP/sector_3_sunk.png"
+				"img/tiles/default/AP/sector_1_sunk.png",
+				"img/tiles/default/AP/sector_2_sunk.png",
+				"img/tiles/default/AP/sector_3_sunk.png"
 			]
 		]
 	]
