@@ -18,6 +18,14 @@ function getShipClass(Grid) {
 	return parseInt(Grid.getAttribute("ship-class"));
 }
 
+function getShipTileImagesURL(shipsSet, classActing, status) {
+	if (img_url.ship_tiles_nation[shipsSet] !== undefined && img_url.ship_tiles_nation[shipsSet][classActing][status].length > 0) {
+		return img_url.ship_tiles_nation[shipsSet][classActing][status];
+	} else {
+		return img_url.ship_tiles_default[classActing][status];
+	}
+}
+
 function onConfigError() {
 	alert(string.game_config_error);
 	location.reload();

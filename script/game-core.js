@@ -28,6 +28,10 @@ var SHIP_CLASS_CA = 2;
 var SHIP_CLASS_DD = 3;
 var SHIP_CLASS_AP = 4;
 
+var SHIP_STATUS_INTACT = 0;
+var SHIP_STATUS_HIT = 1;
+var SHIP_STATUS_DESTROYED = 2;
+
 var max_ship_count;
 var max_bb_count;
 var max_cv_count;
@@ -430,12 +434,12 @@ function projectShip(evt) {
 		if (ship_course_placing === SHIP_COURSE_VERTICAL) {
 			for (var i = 0; i < ship_size_placing; i++) {
 				var tGrid = document.querySelector("[x='" + (targetX + i) + "'][y='" + targetY + "']");
-				tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[ship_class_placing][0][i] + "')";
+				tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, ship_class_placing, SHIP_STATUS_INTACT)[i] + "')";
 			}
 		} else if (ship_course_placing === SHIP_COURSE_HORIZONTAL) {
 			for (var i = 0; i < ship_size_placing; i++) {
 				var tGrid = document.querySelector("[y='" + (targetY + i) + "'][x='" + targetX + "']");
-				tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[ship_class_placing][0][i] + "')";
+				tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, ship_class_placing, SHIP_STATUS_INTACT)[i] + "')";
 				tGrid.classList.add("ShipsTileHorizontal");
 			}
 		}
@@ -483,7 +487,7 @@ function placeShip(evt) {
 		if (ship_course_placing === SHIP_COURSE_VERTICAL) {
 			for (var i = 0; i < ship_size_placing; i++) {
 				var tGrid = document.querySelector("[x='" + (targetX + i) + "'][y='" + targetY + "']");
-				tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[ship_class_placing][0][i] + "')";
+				tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, ship_class_placing, SHIP_STATUS_INTACT)[i] + "')";
 				var classes = tGrid.getAttribute('class');
 				classes = classes + " ShipsTile";
 				tGrid.setAttribute('class', classes);
@@ -501,7 +505,7 @@ function placeShip(evt) {
 		} else if (ship_course_placing === SHIP_COURSE_HORIZONTAL) {
 			for (var i = 0; i < ship_size_placing; i++) {
 				var tGrid = document.querySelector("[y='" + (targetY + i) + "'][x='" + targetX + "']");
-				tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[ship_class_placing][0][i] + "')";
+				tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, ship_class_placing, SHIP_STATUS_INTACT)[i] + "')";
 				var classes = tGrid.getAttribute('class');
 				classes = classes + " ShipsTileHorizontal";
 				tGrid.setAttribute('class', classes);
@@ -1152,7 +1156,7 @@ function onAttackLanded(x, y) {
 					for (var i = 0; i < ship_size; i++) {
 						var Grid = getMonitorGrid("monitorRight", (tx + i), ty);
 						if (!FOG_OF_WAR) {
-							Grid.style.backgroundImage = "url('" + img_url.ship_tiles[tclass][2][i] + "')";
+							Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, tclass, SHIP_STATUS_DESTROYED)[i] + "')";
 						} else {
 							Grid.style.backgroundColor = "#990000";
 						}
@@ -1168,7 +1172,7 @@ function onAttackLanded(x, y) {
 					for (var i = 0; i < ship_size; i++) {
 						var Grid = getMonitorGrid("monitorRight", tx, (ty + i));
 						if (!FOG_OF_WAR) {
-							Grid.style.backgroundImage = "url('" + img_url.ship_tiles[tclass][2][i] + "')";
+							Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, tclass, SHIP_STATUS_DESTROYED)[i][i] + "')";
 						} else {
 							Grid.style.backgroundColor = "#990000";
 						}
@@ -1264,7 +1268,7 @@ function onAttackLanded(x, y) {
 				if (tbearing === SHIP_COURSE_VERTICAL) {
 					for (var i = 0; i < ship_size; i++) {
 						var Grid = getMonitorGrid("monitorLeft", (tx + i), ty);
-						Grid.style.backgroundImage = "url('" + img_url.ship_tiles[tclass][2][i] + "')";
+						Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, tclass, SHIP_STATUS_DESTROYED)[i][i] + "')";
 						var effectId = parseInt(Grid.getAttribute("effectId"));
 						clearInterval(effectId);
 						var c = Grid.firstElementChild; //stop displaying effect for submerged ships
@@ -1275,7 +1279,7 @@ function onAttackLanded(x, y) {
 				} else if (tbearing === SHIP_COURSE_HORIZONTAL) {
 					for (var i = 0; i < ship_size; i++) {
 						var Grid = getMonitorGrid("monitorLeft", tx, (ty + i));
-						Grid.style.backgroundImage = "url('" + img_url.ship_tiles[tclass][2][i] + "')";
+						Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, tclass, SHIP_STATUS_DESTROYED)[i][i] + "')";
 						var effectId = parseInt(Grid.getAttribute("effectId"));
 						clearInterval(effectId);
 						var c = Grid.firstElementChild; //stop displaying effect for submerged ships

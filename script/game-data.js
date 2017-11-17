@@ -108,7 +108,7 @@ var img_url = {
 
 
 	],
-	"ship_tiles": [
+	"ship_tiles_default": [
 		[
 			[
 				"img/tiles/default/BB/sector_1_normal.png",
@@ -197,6 +197,83 @@ var img_url = {
 				"img/tiles/default/AP/sector_2_sunk.png",
 				"img/tiles/default/AP/sector_3_sunk.png"
 			]
+		]
+	],
+	"ship_tiles_nation": [
+		[
+			[
+				[
+					"img/tiles/jp/BB/sector_1_normal.png",
+					"img/tiles/jp/BB/sector_2_normal.png",
+					"img/tiles/jp/BB/sector_3_normal.png",
+					"img/tiles/jp/BB/sector_4_normal.png"
+				],
+				[
+					"img/tiles/jp/BB/sector_1_hit.png",
+					"img/tiles/jp/BB/sector_2_hit.png",
+					"img/tiles/jp/BB/sector_3_hit.png",
+					"img/tiles/jp/BB/sector_4_hit.png"
+				],
+				[
+					"img/tiles/jp/BB/sector_1_sunk.png",
+					"img/tiles/jp/BB/sector_2_sunk.png",
+					"img/tiles/jp/BB/sector_3_sunk.png",
+					"img/tiles/jp/BB/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/jp/CV/sector_1_normal.png",
+					"img/tiles/jp/CV/sector_2_normal.png",
+					"img/tiles/jp/CV/sector_3_normal.png",
+					"img/tiles/jp/CV/sector_4_normal.png"
+				],
+				[
+					"img/tiles/jp/CV/sector_1_hit.png",
+					"img/tiles/jp/CV/sector_2_hit.png",
+					"img/tiles/jp/CV/sector_3_hit.png",
+					"img/tiles/jp/CV/sector_4_hit.png"
+				],
+				[
+					"img/tiles/jp/CV/sector_1_sunk.png",
+					"img/tiles/jp/CV/sector_2_sunk.png",
+					"img/tiles/jp/CV/sector_3_sunk.png",
+					"img/tiles/jp/CV/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/jp/CA/sector_1_normal.png",
+					"img/tiles/jp/CA/sector_2_normal.png",
+					"img/tiles/jp/CA/sector_3_normal.png"
+				],
+				[
+					"img/tiles/jp/CA/sector_1_hit.png",
+					"img/tiles/jp/CA/sector_2_hit.png",
+					"img/tiles/jp/CA/sector_3_hit.png"
+				],
+				[
+					"img/tiles/jp/CA/sector_1_sunk.png",
+					"img/tiles/jp/CA/sector_2_sunk.png",
+					"img/tiles/jp/CA/sector_3_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/jp/DD/sector_1_normal.png",
+					"img/tiles/jp/DD/sector_2_normal.png"
+				],
+				[
+					"img/tiles/jp/DD/sector_1_hit.png",
+					"img/tiles/jp/DD/sector_2_hit.png"
+				],
+				[
+					"img/tiles/jp/DD/sector_1_sunk.png",
+					"img/tiles/jp/DD/sector_2_sunk.png"
+				]
+
+			],
+			[]
 		]
 	]
 };
