@@ -382,19 +382,7 @@ function onShipIconSelected(evt) {
  * Check if a ship can be placed in the given coordinate
  */
 function shipPlaceable(x, y) {
-	switch (ship_class_placing) {
-		case SHIP_CLASS_BB:
-		case SHIP_CLASS_CV:
-			ship_size_placing = 4;
-			break;
-		case SHIP_CLASS_CA:
-		case SHIP_CLASS_AP:
-			ship_size_placing = 3;
-			break;
-		case SHIP_CLASS_DD:
-			ship_size_placing = 2;
-			break;
-	}
+	ship_size_placing = SHIP_SIZE[ship_class_placing];
 	if (ship_course_placing === SHIP_COURSE_VERTICAL) {
 		//check if over edge of map
 		if ((x + ship_size_placing) <= map_size && y <= map_size) {
@@ -486,7 +474,7 @@ function placeShip(evt) {
 	if (shipPlaceable(targetX, targetY)) {
 		if (ship_course_placing === SHIP_COURSE_VERTICAL) {
 			for (var i = 0; i < ship_size_placing; i++) {
-				var tGrid = document.querySelector("[x='" + (targetX + i) + "'][y='" + targetY + "']");
+				var tGrid = getMonitorGrid("monitorLeft", (targetX + i), targetY);
 				tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, ship_class_placing, SHIP_STATUS_INTACT)[i] + "')";
 				var classes = tGrid.getAttribute('class');
 				classes = classes + " ShipsTile";
@@ -504,7 +492,7 @@ function placeShip(evt) {
 			}
 		} else if (ship_course_placing === SHIP_COURSE_HORIZONTAL) {
 			for (var i = 0; i < ship_size_placing; i++) {
-				var tGrid = document.querySelector("[y='" + (targetY + i) + "'][x='" + targetX + "']");
+				var tGrid = getMonitorGrid("monitorLeft", targetX, (targetY + i));
 				tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, ship_class_placing, SHIP_STATUS_INTACT)[i] + "')";
 				var classes = tGrid.getAttribute('class');
 				classes = classes + " ShipsTileHorizontal";
@@ -1344,34 +1332,8 @@ function shipDestroyed(map, x, y) {
 	var ty = parseInt(tGrid.getAttribute("head-y"));
 	var sClass = parseInt(tGrid.getAttribute("ship-class"));
 	var bearing = parseInt(tGrid.getAttribute("ship-bearing"));
-	var ship_size;
-	var criticalDamage;
-	switch (sClass) {
-		case SHIP_CLASS_BB:
-			ship_size = 4;
-			if (game_mode === GAME_MODE_CLASSIC) {
-				criticalDamage = 1;
-			} else {
-				criticalDamage = 2;
-			}
-			break;
-		case SHIP_CLASS_CV:
-			ship_size = 4;
-			criticalDamage = 1;
-			break;
-		case SHIP_CLASS_CA:
-			ship_size = 3;
-			criticalDamage = 1;
-			break;
-		case SHIP_CLASS_DD:
-			ship_size = 2;
-			criticalDamage = 1;
-			break;
-		case SHIP_CLASS_AP:
-			ship_size = 3;
-			criticalDamage = 1;
-			break;
-	}
+	var ship_size = SHIP_SIZE[sClass];
+	var criticalDamage = getShipCriticalDamage(sClass);
 	if (bearing === SHIP_COURSE_VERTICAL) {
 		for (var i = 0; i < ship_size; i++) {
 			var Grid = document.getElementById(map).querySelector("[x='" + (tx + i) + "'][y='" + ty + "']");
@@ -1404,6 +1366,15 @@ function shipDestroyed(map, x, y) {
 		}
 	}
 }
+
+function getShipCriticalDamage(shipClass) {//TODO section specific critical damage
+	if (game_mode === GAME_MODE_CLASSIC) {
+		return 1;
+	} else {
+		return CRITICAL_DAMAGE[shipClass];
+	}
+}
+
 
 function lockOnSector(evt) {
 	var targetGrid = evt.target;
@@ -1837,7 +1808,7 @@ function showStageBox(stageText, duration) {
 	}, duration + 2000);
 }
 
-function surrender(evt) {
+function surrender() {
 	//TODO replace confirm with html 5 dialog
 	if (confirm(string.surrender_confirm)) {
 		//scuttle all ships to trigger lose effect
