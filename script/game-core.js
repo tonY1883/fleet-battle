@@ -659,6 +659,7 @@ function stopPlayerShipPlacement() {
 		grids[i].removeEventListener('click', placeShip, false);
 		grids[i].removeEventListener('mouseover', projectShip, false);
 		grids[i].removeEventListener('mouseout', unProjectShip, false);
+		grids[i].removeEventListener('contextmenu', changeShipCourse, false);
 	}
 	//delete the button if it still exsists
 	if (document.getElementById("rbutton") !== null) {
@@ -1116,25 +1117,8 @@ function onAttackLanded(x, y) {
 				var ty = parseInt(tGrid.getAttribute("head-y"));
 				var tclass = parseInt(tGrid.getAttribute("ship-class"));
 				var tbearing = parseInt(tGrid.getAttribute("ship-bearing"));
-				var ship_size;
-				switch (tclass) {
-					case SHIP_CLASS_BB:
-						ship_size = 4;
-						player_2_ships_count[SHIP_CLASS_BB] = player_2_ships_count[SHIP_CLASS_BB] - 1;
-						break;
-					case SHIP_CLASS_CV:
-						ship_size = 4;
-						player_2_ships_count[SHIP_CLASS_CV] = player_2_ships_count[SHIP_CLASS_CV] - 1;
-						break;
-					case SHIP_CLASS_CA:
-						ship_size = 3;
-						player_2_ships_count[SHIP_CLASS_CA] = player_2_ships_count[SHIP_CLASS_CA] - 1;
-						break;
-					case SHIP_CLASS_DD:
-						ship_size = 2;
-						player_2_ships_count[SHIP_CLASS_DD] = player_2_ships_count[SHIP_CLASS_DD] - 1;
-						break;
-				}
+				var ship_size = SHIP_SIZE[tclass];
+				player_2_ships_count[tclass] = player_2_ships_count[tclass] - 1;
 				if (!FOG_OF_WAR) {
 					refreshEnemyPanel();
 				} else {
@@ -1160,7 +1144,7 @@ function onAttackLanded(x, y) {
 					for (var i = 0; i < ship_size; i++) {
 						var Grid = getMonitorGrid("monitorRight", tx, (ty + i));
 						if (!FOG_OF_WAR) {
-							Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, tclass, SHIP_STATUS_DESTROYED)[i][i] + "')";
+							Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, tclass, SHIP_STATUS_DESTROYED)[i] + "')";
 						} else {
 							Grid.style.backgroundColor = "#990000";
 						}
@@ -1233,30 +1217,13 @@ function onAttackLanded(x, y) {
 				var tclass = parseInt(tGrid.getAttribute("ship-class"));
 				var tbearing = parseInt(tGrid.getAttribute("ship-bearing"));
 				//mark the ships as destroyed
-				var ship_size;
-				switch (tclass) {
-					case SHIP_CLASS_BB:
-						ship_size = 4;
-						player_1_ships_count[SHIP_CLASS_BB] = player_1_ships_count[SHIP_CLASS_BB] - 1;
-						break;
-					case SHIP_CLASS_CV:
-						ship_size = 4;
-						player_1_ships_count[SHIP_CLASS_CV] = player_1_ships_count[SHIP_CLASS_CV] - 1;
-						break;
-					case SHIP_CLASS_CA:
-						ship_size = 3;
-						player_1_ships_count[SHIP_CLASS_CA] = player_1_ships_count[SHIP_CLASS_CA] - 1;
-						break;
-					case SHIP_CLASS_DD:
-						ship_size = 2;
-						player_1_ships_count[SHIP_CLASS_DD] = player_1_ships_count[SHIP_CLASS_DD] - 1;
-						break;
-				}
+				var ship_size = SHIP_SIZE[tclass];
+				player_1_ships_count[tclass] = player_1_ships_count[tclass] - 1;
 				refreshPlayerPanel();
 				if (tbearing === SHIP_COURSE_VERTICAL) {
 					for (var i = 0; i < ship_size; i++) {
 						var Grid = getMonitorGrid("monitorLeft", (tx + i), ty);
-						Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, tclass, SHIP_STATUS_DESTROYED)[i][i] + "')";
+						Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, tclass, SHIP_STATUS_DESTROYED)[i] + "')";
 						var effectId = parseInt(Grid.getAttribute("effectId"));
 						clearInterval(effectId);
 						var c = Grid.firstElementChild; //stop displaying effect for submerged ships
@@ -1267,7 +1234,7 @@ function onAttackLanded(x, y) {
 				} else if (tbearing === SHIP_COURSE_HORIZONTAL) {
 					for (var i = 0; i < ship_size; i++) {
 						var Grid = getMonitorGrid("monitorLeft", tx, (ty + i));
-						Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, tclass, SHIP_STATUS_DESTROYED)[i][i] + "')";
+						Grid.style.backgroundImage = "url('" + getShipTileImagesURL(player_1_ship_set, tclass, SHIP_STATUS_DESTROYED)[i] + "')";
 						var effectId = parseInt(Grid.getAttribute("effectId"));
 						clearInterval(effectId);
 						var c = Grid.firstElementChild; //stop displaying effect for submerged ships
@@ -1336,7 +1303,7 @@ function shipDestroyed(map, x, y) {
 	var criticalDamage = getShipCriticalDamage(sClass);
 	if (bearing === SHIP_COURSE_VERTICAL) {
 		for (var i = 0; i < ship_size; i++) {
-			var Grid = document.getElementById(map).querySelector("[x='" + (tx + i) + "'][y='" + ty + "']");
+			var Grid = getMonitorGrid(map, (tx + i), ty);
 			if (Grid.hasAttribute("hit_count")) {
 				if (parseInt(Grid.getAttribute("hit_count")) >= criticalDamage) {
 					if (i === (ship_size - 1)) {
@@ -1351,7 +1318,7 @@ function shipDestroyed(map, x, y) {
 		}
 	} else if (bearing === SHIP_COURSE_HORIZONTAL) {
 		for (var i = 0; i < ship_size; i++) {
-			var Grid = document.getElementById(map).querySelector("[y='" + (ty + i) + "'][x='" + tx + "']");
+			var Grid = getMonitorGrid(map, tx, (ty + i));
 			if (Grid.hasAttribute("hit_count")) {
 				if (parseInt(Grid.getAttribute("hit_count")) >= criticalDamage) {
 					if (i === (ship_size - 1)) {
@@ -1556,16 +1523,16 @@ function nextPlayer() {
 							nextPlayer();
 						}
 					} else {
-						if (player_2_turn_counter <= player_2_ships_count[SHIP_CLASS_BB]) {
+						if (player_2_turn_counter < player_2_ships_count[SHIP_CLASS_BB]) {
 							ship_class_acting = SHIP_CLASS_BB;
 							player_2_attack_count = BB_ATTACK_COUNT[player_2_engagement_form];
-						} else if (player_2_turn_counter <= player_2_ships_count[SHIP_CLASS_CA] + player_2_ships_count[SHIP_CLASS_BB]) {
+						} else if (player_2_turn_counter < player_2_ships_count[SHIP_CLASS_CA] + player_2_ships_count[SHIP_CLASS_BB]) {
 							ship_class_acting = SHIP_CLASS_CA;
 							player_2_attack_count = CA_ATTACK_COUNT[player_2_engagement_form];
-						} else if (player_2_turn_counter <= player_2_ships_count[SHIP_CLASS_DD] + player_2_ships_count[SHIP_CLASS_CA] + player_2_ships_count[SHIP_CLASS_BB]) {
+						} else if (player_2_turn_counter < player_2_ships_count[SHIP_CLASS_DD] + player_2_ships_count[SHIP_CLASS_CA] + player_2_ships_count[SHIP_CLASS_BB]) {
 							ship_class_acting = SHIP_CLASS_DD;
 							player_2_attack_count = DD_ATTACK_COUNT[player_2_engagement_form];
-						} else if (player_2_turn_counter <= player_2_ships_count[SHIP_CLASS_CV] + player_2_ships_count[SHIP_CLASS_DD] + player_2_ships_count[SHIP_CLASS_CA] + player_2_ships_count[SHIP_CLASS_BB]) {
+						} else if (player_2_turn_counter < player_2_ships_count[SHIP_CLASS_CV] + player_2_ships_count[SHIP_CLASS_DD] + player_2_ships_count[SHIP_CLASS_CA] + player_2_ships_count[SHIP_CLASS_BB]) {
 							ship_class_acting = SHIP_CLASS_CV;
 							player_2_attack_count = CV_ATTACK_COUNT[player_2_engagement_form];
 						}
@@ -1678,16 +1645,16 @@ function nextPlayer() {
 							nextPlayer();
 						}
 					} else {
-						if (player_1_turn_counter <= player_1_ships_count[SHIP_CLASS_BB]) {
+						if (player_1_turn_counter < player_1_ships_count[SHIP_CLASS_BB]) {
 							ship_class_acting = SHIP_CLASS_BB;
 							player_1_attack_count = BB_ATTACK_COUNT[player_1_engagement_form];
-						} else if (player_1_turn_counter <= player_1_ships_count[SHIP_CLASS_CA] + player_1_ships_count[SHIP_CLASS_BB]) {
+						} else if (player_1_turn_counter < player_1_ships_count[SHIP_CLASS_CA] + player_1_ships_count[SHIP_CLASS_BB]) {
 							ship_class_acting = SHIP_CLASS_CA;
 							player_1_attack_count = CA_ATTACK_COUNT[player_1_engagement_form];
-						} else if (player_1_turn_counter <= player_1_ships_count[SHIP_CLASS_DD] + player_1_ships_count[SHIP_CLASS_CA] + player_1_ships_count[SHIP_CLASS_BB]) {
+						} else if (player_1_turn_counter < player_1_ships_count[SHIP_CLASS_DD] + player_1_ships_count[SHIP_CLASS_CA] + player_1_ships_count[SHIP_CLASS_BB]) {
 							ship_class_acting = SHIP_CLASS_DD;
 							player_1_attack_count = DD_ATTACK_COUNT[player_1_engagement_form];
-						} else if (player_1_turn_counter <= player_1_ships_count[SHIP_CLASS_CV] + player_1_ships_count[SHIP_CLASS_DD] + player_1_ships_count[SHIP_CLASS_CA] + player_1_ships_count[SHIP_CLASS_BB]) {
+						} else if (player_1_turn_counter < player_1_ships_count[SHIP_CLASS_CV] + player_1_ships_count[SHIP_CLASS_DD] + player_1_ships_count[SHIP_CLASS_CA] + player_1_ships_count[SHIP_CLASS_BB]) {
 							ship_class_acting = SHIP_CLASS_CV;
 							player_1_attack_count = CV_ATTACK_COUNT[player_1_engagement_form];
 						}
