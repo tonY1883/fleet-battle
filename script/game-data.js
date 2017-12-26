@@ -274,6 +274,83 @@ var img_url = {
 
 			],
 			[]
+		],
+		[],
+		[],
+		[
+			[
+				[
+					"img/tiles/de/BB/sector_1_normal.png",
+					"img/tiles/de/BB/sector_2_normal.png",
+					"img/tiles/de/BB/sector_3_normal.png",
+					"img/tiles/de/BB/sector_4_normal.png"
+				],
+				[
+					"img/tiles/de/BB/sector_1_hit.png",
+					"img/tiles/de/BB/sector_2_hit.png",
+					"img/tiles/de/BB/sector_3_hit.png",
+					"img/tiles/de/BB/sector_4_hit.png"
+				],
+				[
+					"img/tiles/de/BB/sector_1_sunk.png",
+					"img/tiles/de/BB/sector_2_sunk.png",
+					"img/tiles/de/BB/sector_3_sunk.png",
+					"img/tiles/de/BB/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/de/CV/sector_1_normal.png",
+					"img/tiles/de/CV/sector_2_normal.png",
+					"img/tiles/de/CV/sector_3_normal.png",
+					"img/tiles/de/CV/sector_4_normal.png"
+				],
+				[
+					"img/tiles/de/CV/sector_1_hit.png",
+					"img/tiles/de/CV/sector_2_hit.png",
+					"img/tiles/jp/CV/sector_3_hit.png",
+					"img/tiles/jp/CV/sector_4_hit.png"
+				],
+				[
+					"img/tiles/de/CV/sector_1_sunk.png",
+					"img/tiles/de/CV/sector_2_sunk.png",
+					"img/tiles/de/CV/sector_3_sunk.png",
+					"img/tiles/de/CV/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/de/CA/sector_1_normal.png",
+					"img/tiles/de/CA/sector_2_normal.png",
+					"img/tiles/de/CA/sector_3_normal.png"
+				],
+				[
+					"img/tiles/de/CA/sector_1_hit.png",
+					"img/tiles/de/CA/sector_2_hit.png",
+					"img/tiles/jp/CA/sector_3_hit.png"
+				],
+				[
+					"img/tiles/de/CA/sector_1_sunk.png",
+					"img/tiles/de/CA/sector_2_sunk.png",
+					"img/tiles/de/CA/sector_3_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/de/DD/sector_1_normal.png",
+					"img/tiles/de/DD/sector_2_normal.png"
+				],
+				[
+					"img/tiles/de/DD/sector_1_hit.png",
+					"img/tiles/de/DD/sector_2_hit.png"
+				],
+				[
+					"img/tiles/de/DD/sector_1_sunk.png",
+					"img/tiles/de/DD/sector_2_sunk.png"
+				]
+
+			],
+			[]
 		]
 	]
 };
