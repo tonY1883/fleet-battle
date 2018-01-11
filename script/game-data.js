@@ -275,7 +275,81 @@ var img_url = {
 			],
 			[]
 		],
-		[],
+		[
+			[
+				[
+					"img/tiles/us/BB/sector_1_normal.png",
+					"img/tiles/us/BB/sector_2_normal.png",
+					"img/tiles/us/BB/sector_3_normal.png",
+					"img/tiles/us/BB/sector_4_normal.png"
+				],
+				[
+					"img/tiles/us/BB/sector_1_hit.png",
+					"img/tiles/us/BB/sector_2_hit.png",
+					"img/tiles/us/BB/sector_3_hit.png",
+					"img/tiles/us/BB/sector_4_hit.png"
+				],
+				[
+					"img/tiles/us/BB/sector_1_sunk.png",
+					"img/tiles/us/BB/sector_2_sunk.png",
+					"img/tiles/us/BB/sector_3_sunk.png",
+					"img/tiles/us/BB/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/us/CV/sector_1_normal.png",
+					"img/tiles/us/CV/sector_2_normal.png",
+					"img/tiles/us/CV/sector_3_normal.png",
+					"img/tiles/us/CV/sector_4_normal.png"
+				],
+				[
+					"img/tiles/us/CV/sector_1_hit.png",
+					"img/tiles/us/CV/sector_2_hit.png",
+					"img/tiles/us/CV/sector_3_hit.png",
+					"img/tiles/us/CV/sector_4_hit.png"
+				],
+				[
+					"img/tiles/us/CV/sector_1_sunk.png",
+					"img/tiles/us/CV/sector_2_sunk.png",
+					"img/tiles/us/CV/sector_3_sunk.png",
+					"img/tiles/us/CV/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/us/CA/sector_1_normal.png",
+					"img/tiles/us/CA/sector_2_normal.png",
+					"img/tiles/us/CA/sector_3_normal.png"
+				],
+				[
+					"img/tiles/us/CA/sector_1_hit.png",
+					"img/tiles/us/CA/sector_2_hit.png",
+					"img/tiles/us/CA/sector_3_hit.png"
+				],
+				[
+					"img/tiles/us/CA/sector_1_sunk.png",
+					"img/tiles/us/CA/sector_2_sunk.png",
+					"img/tiles/us/CA/sector_3_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/us/DD/sector_1_normal.png",
+					"img/tiles/us/DD/sector_2_normal.png"
+				],
+				[
+					"img/tiles/us/DD/sector_1_hit.png",
+					"img/tiles/us/DD/sector_2_hit.png"
+				],
+				[
+					"img/tiles/us/DD/sector_1_sunk.png",
+					"img/tiles/us/DD/sector_2_sunk.png"
+				]
+
+			],
+			[]
+		],
 		[],
 		[
 			[
@@ -308,8 +382,8 @@ var img_url = {
 				[
 					"img/tiles/de/CV/sector_1_hit.png",
 					"img/tiles/de/CV/sector_2_hit.png",
-					"img/tiles/jp/CV/sector_3_hit.png",
-					"img/tiles/jp/CV/sector_4_hit.png"
+					"img/tiles/de/CV/sector_3_hit.png",
+					"img/tiles/de/CV/sector_4_hit.png"
 				],
 				[
 					"img/tiles/de/CV/sector_1_sunk.png",
