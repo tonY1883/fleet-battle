@@ -77,6 +77,8 @@ var player_2_acted = false;
 //SFXs
 var gun_fire_sound;
 var plane_attack_sound;
+var gun_fire_sound_enemy;
+var plane_attack_sound_enemy;
 var attack_hit_sound;
 var attack_miss_sound;
 var attack_hit_sound_distant;
@@ -89,6 +91,7 @@ function readyGame() {
 	if (SOUND_ENABLED) {
 		gun_fire_sound = new Audio(sfx_url.gun_fire);
 		plane_attack_sound = new Audio(sfx_url.plane_attack);
+		plane_attack_sound_enemy = new Audio(sfx_url.plane_attack_enemy);
 		attack_hit_sound = new Audio(sfx_url.explosion);
 		attack_miss_sound = new Audio(sfx_url.explosion_water);
 		attack_hit_sound_distant = new Audio(sfx_url.explosion_distant);
@@ -1073,11 +1076,16 @@ function fire(evt) {
 }
 
 function airStrike(x, y) {
-	if (SOUND_ENABLED) {
+	if (SOUND_ENABLED && acting_player === PLAYER_1) {
 		plane_attack_sound.play();
 		setTimeout(function () {
 			onAttackLanded(x, y);
 		}, plane_attack_sound.duration * 1000 + 800);
+	} else if (SOUND_ENABLED && acting_player === PLAYER_2) {
+		plane_attack_sound_enemy.play();
+		setTimeout(function () {
+			onAttackLanded(x, y);
+		}, plane_attack_sound.duration * 1000 + 100);
 	} else {
 		onAttackLanded(x, y);
 	}
