@@ -919,7 +919,6 @@ function aerialCombat() {
 	var first = RNG(PLAYER_1, PLAYER_2);
 	if (first === PLAYER_1) {
 		acting_player = PLAYER_1;
-		promptAction();
 		if (SOUND_ENABLED) {
 			showStageBox(string.game_stage_aerial_prompt_player, plane_start_sound.duration * 1000);
 			plane_start_sound.play();
@@ -935,10 +934,10 @@ function aerialCombat() {
 		}
 	} else {
 		acting_player = PLAYER_2;
-		promptAction();
 		showStageBox(string.game_stage_aerial_prompt_enemy);
 		player_2_attack_count = player_2_ships_count[SHIP_CLASS_CV] * 2;
 		if (player_2_attack_count > 0) {
+			promptAction();
 			attackMain();
 		} else {
 			//no CVs
@@ -1444,10 +1443,10 @@ function refreshEnemyPanel() {
 }
 
 function nextPlayer() {
+	hideActionPrompt();//just in case
 	if (gameEnded()) {
 		refreshPlayerPanel();
 		refreshEnemyPanel();
-		hideActionPrompt();
 		var mainButton = document.getElementById("mainButton");
 		mainButton.innerHTML = string.new_game;
 		mainButton.removeEventListener('click', surrender, false);
@@ -1579,7 +1578,6 @@ function nextPlayer() {
 		}
 
 	} else {
-		hideActionPrompt();
 		acting_player = PLAYER_1;
 		switch (game_mode) {
 			case GAME_MODE_SKIRMISH:
