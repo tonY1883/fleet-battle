@@ -983,8 +983,6 @@ function startFleetCombat() {
 			//DO NOTHING
 			break;
 	}
-
-	//TODO sound fx and animation
 	if (!FOG_OF_WAR) {
 		document.getElementById("FoELabel").innerHTML = string.form_of_engagement_label;
 		document.getElementById("FoE").innerHTML = string.form_of_engagement[player_1_engagement_form];
@@ -999,7 +997,7 @@ function startFleetCombat() {
 			case GAME_MODE_SKIRMISH:
 			case GAME_MODE_INTERCEPT:
 				//let's see what type of ships we have.
-				if (player_1_turn_counter <= player_1_ships_count[SHIP_CLASS_BB]) {
+				if (player_1_turn_counter < player_1_ships_count[SHIP_CLASS_BB]) {
 					ship_class_acting = SHIP_CLASS_BB;
 					player_1_attack_count = BB_ATTACK_COUNT[player_1_engagement_form];
 				}
@@ -1022,7 +1020,7 @@ function startFleetCombat() {
 		switch (game_mode) {
 			case GAME_MODE_SKIRMISH:
 				//let's see what type of ships we have.
-				if (player_2_turn_counter <= player_2_ships_count[SHIP_CLASS_BB]) {
+				if (player_2_turn_counter < player_2_ships_count[SHIP_CLASS_BB]) {
 					ship_class_acting = SHIP_CLASS_BB;
 					player_2_attack_count = BB_ATTACK_COUNT[player_2_engagement_form];
 				}
@@ -1067,12 +1065,8 @@ function fire(evt) {
 	var targetGrid = evt.target;
 	var targetX = parseInt(targetGrid.getAttribute('x'));
 	var targetY = parseInt(targetGrid.getAttribute('y'));
-	if (acting_player === PLAYER_1) {
-		player_1_attack_count = player_1_attack_count - 1;
-		document.getElementById("counterLeft").innerHTML = player_1_attack_count;
-	} else if (acting_player === PLAYER_2) {
-		player_2_attack_count = player_2_attack_count - 1;
-	}
+	player_1_attack_count = player_1_attack_count - 1;
+	document.getElementById("counterLeft").innerHTML = player_1_attack_count;
 	stopTargeting();
 	if (ship_class_acting === SHIP_CLASS_CV) {
 		airStrike(targetX, targetY);
@@ -1459,7 +1453,6 @@ function nextPlayer() {
 		mainButton.removeEventListener('click', surrender, false);
 		mainButton.addEventListener('click', newGame, false);
 	} else if (acting_player === PLAYER_1) {
-		hideActionPrompt();
 		acting_player = PLAYER_2;
 		promptAction();
 		switch (game_mode) {
