@@ -145,7 +145,7 @@ function shipPlacementBasic() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTile";
 					tGrid.setAttribute('class', classes);
@@ -161,7 +161,7 @@ function shipPlacementBasic() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTileHorizontal";
 					tGrid.setAttribute('class', classes);
@@ -240,7 +240,7 @@ function shipPlacementIntermediate() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTile";
 					tGrid.setAttribute('class', classes);
@@ -256,7 +256,7 @@ function shipPlacementIntermediate() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTileHorizontal";
 					tGrid.setAttribute('class', classes);
@@ -342,7 +342,7 @@ function shipPlacementAdvanced() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTile";
 					tGrid.setAttribute('class', classes);
@@ -358,7 +358,7 @@ function shipPlacementAdvanced() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTileHorizontal";
 					tGrid.setAttribute('class', classes);
