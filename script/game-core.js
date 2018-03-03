@@ -75,9 +75,9 @@ var player_2_turn_counter = 0;
 var player_2_acted = false;
 
 //SFXs
+var plane_start_sound;
 var gun_fire_sound;
 var plane_attack_sound;
-var gun_fire_sound_enemy;
 var plane_attack_sound_enemy;
 var attack_hit_sound;
 var attack_miss_sound;
@@ -89,6 +89,7 @@ var attack_hit_sound_distant;
 function readyGame() {
 	//load the sound first
 	if (SOUND_ENABLED) {
+		plane_start_sound = new Audio(sfx_url.plane_start_engine);
 		gun_fire_sound = new Audio(sfx_url.gun_fire);
 		plane_attack_sound = new Audio(sfx_url.plane_attack);
 		plane_attack_sound_enemy = new Audio(sfx_url.plane_attack_enemy);
@@ -919,7 +920,12 @@ function aerialCombat() {
 	if (first === PLAYER_1) {
 		acting_player = PLAYER_1;
 		promptAction();
-		showStageBox(string.game_stage_aerial_prompt_player);
+		if (SOUND_ENABLED) {
+			showStageBox(string.game_stage_aerial_prompt_player, plane_start_sound.duration * 1000);
+			plane_start_sound.play();
+		} else {
+			showStageBox(string.game_stage_aerial_prompt_player);
+		}
 		player_1_attack_count = player_1_ships_count[SHIP_CLASS_CV] * 2;
 		if (player_1_attack_count > 0) {
 			beginTargeting();
@@ -1591,7 +1597,12 @@ function nextPlayer() {
 					player_2_acted = true;
 					player_1_attack_count = player_1_ships_count[SHIP_CLASS_CV] * 2;
 					if (player_1_attack_count > 0 && !player_1_acted) {
-						showStageBox(string.game_stage_aerial_prompt_player);
+						if (SOUND_ENABLED) {
+							showStageBox(string.game_stage_aerial_prompt_player, plane_start_sound.duration * 1000);
+							plane_start_sound.play();
+						} else {
+							showStageBox(string.game_stage_aerial_prompt_player);
+						}
 						beginTargeting();
 					} else {
 						startFleetCombat();

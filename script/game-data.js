@@ -507,7 +507,8 @@ var sfx_url = {
 	"gun_fire": "sound/sfx/gunfire.ogg",
 	"explosion": "sound/sfx/explosion.ogg",
 	"plane_attack": "sound/sfx/plane.ogg",
-	"plane_attack_enemy": "sound/sfx/plane-gun.ogg",
+	"plane_attack_enemy": "sound/sfx/plane-aa-gun.ogg",
+	"plane_start_engine": "sound/sfx/plane-start-engine.ogg",
 	"explosion_water": "sound/sfx/explosion-water.ogg",
 	"explosion_distant": "sound/sfx/explosion-distant.ogg"
 };
