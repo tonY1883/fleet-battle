@@ -75,7 +75,8 @@ var player_2_turn_counter = 0;
 var player_2_acted = false;
 
 //SFXs
-var plane_start_sound;
+var plane_battle_start_sound;
+var gun_battle_start_sound;
 var gun_fire_sound;
 var plane_attack_sound;
 var plane_attack_sound_enemy;
@@ -89,7 +90,8 @@ var attack_hit_sound_distant;
 function readyGame() {
 	//load the sound first
 	if (SOUND_ENABLED) {
-		plane_start_sound = new Audio(sfx_url.plane_start_engine);
+		plane_battle_start_sound = new Audio(sfx_url.plane_start_engine);
+		gun_battle_start_sound = new Audio(sfx_url.buzzer);
 		gun_fire_sound = new Audio(sfx_url.gun_fire);
 		plane_attack_sound = new Audio(sfx_url.plane_attack);
 		plane_attack_sound_enemy = new Audio(sfx_url.plane_attack_enemy);
@@ -920,8 +922,8 @@ function aerialCombat() {
 	if (first === PLAYER_1) {
 		acting_player = PLAYER_1;
 		if (SOUND_ENABLED) {
-			showStageBox(string.game_stage_aerial_prompt_player, plane_start_sound.duration * 1000);
-			plane_start_sound.play();
+			showStageBox(string.game_stage_aerial_prompt_player, plane_battle_start_sound.duration * 1000);
+			plane_battle_start_sound.play();
 		} else {
 			showStageBox(string.game_stage_aerial_prompt_player);
 		}
@@ -950,6 +952,9 @@ function startFleetCombat() {
 	game_phase = GAME_PHASE_COMBAT;
 	document.getElementById("stage").innerHTML = string.game_stage_artillery;
 	showStageBox(string.game_stage_artillery_prompt);
+	if (SOUND_ENABLED) {
+		gun_battle_start_sound.play();
+	}
 	switch (game_mode) {
 		case GAME_MODE_SKIRMISH:
 		case GAME_MODE_INTERCEPT:
@@ -1589,8 +1594,8 @@ function nextPlayer() {
 					player_1_attack_count = player_1_ships_count[SHIP_CLASS_CV] * 2;
 					if (player_1_attack_count > 0 && !player_1_acted) {
 						if (SOUND_ENABLED) {
-							showStageBox(string.game_stage_aerial_prompt_player, plane_start_sound.duration * 1000);
-							plane_start_sound.play();
+							showStageBox(string.game_stage_aerial_prompt_player, plane_battle_start_sound.duration * 1000);
+							plane_battle_start_sound.play();
 						} else {
 							showStageBox(string.game_stage_aerial_prompt_player);
 						}
