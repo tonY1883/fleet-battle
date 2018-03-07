@@ -510,5 +510,6 @@ var sfx_url = {
 	"plane_attack_enemy": "sound/sfx/plane-aa-gun.ogg",
 	"plane_start_engine": "sound/sfx/plane-start-engine.ogg",
 	"explosion_water": "sound/sfx/explosion-water.ogg",
-	"explosion_distant": "sound/sfx/explosion-distant.ogg"
+	"explosion_distant": "sound/sfx/explosion-distant.ogg",
+	"buzzer": "sound/sfx/buzzer-alarm.ogg"
 };
