@@ -918,9 +918,8 @@ function aerialCombat() {
 	ship_class_acting = SHIP_CLASS_CV;
 	document.getElementById("stage").innerHTML = string.game_stage_aerial;
 	//determine who will go first
-	var first = RNG(PLAYER_1, PLAYER_2);
-	if (first === PLAYER_1) {
-		acting_player = PLAYER_1;
+	acting_player = RNG(PLAYER_1, PLAYER_2);
+	if (acting_player === PLAYER_1 && player_1_ships_count[SHIP_CLASS_CV] > 0) {
 		if (SOUND_ENABLED) {
 			showStageBox(string.game_stage_aerial_prompt_player, plane_battle_start_sound.duration * 1000);
 			plane_battle_start_sound.play();
@@ -928,23 +927,16 @@ function aerialCombat() {
 			showStageBox(string.game_stage_aerial_prompt_player);
 		}
 		player_1_attack_count = player_1_ships_count[SHIP_CLASS_CV] * 2;
-		if (player_1_attack_count > 0) {
+
 			beginTargeting();
-		} else {
-			//no CVs
-			nextPlayer();
-		}
-	} else {
-		acting_player = PLAYER_2;
+
+	} else if (acting_player === PLAYER_2 && player_2_ships_count[SHIP_CLASS_CV] > 0) {
 		showStageBox(string.game_stage_aerial_prompt_enemy);
 		player_2_attack_count = player_2_ships_count[SHIP_CLASS_CV] * 2;
-		if (player_2_attack_count > 0) {
 			promptAction();
 			attackMain();
-		} else {
-			//no CVs
-			nextPlayer();
-		}
+	} else {
+		nextPlayer();
 	}
 }
 
@@ -1472,6 +1464,7 @@ function nextPlayer() {
 						attackMain();
 					} else {
 						//well both acted. let's move to next stage.
+						hideActionPrompt();
 						startFleetCombat();
 					}
 				} else if (game_phase === GAME_PHASE_COMBAT) {
