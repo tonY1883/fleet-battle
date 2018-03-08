@@ -25,6 +25,10 @@ function showStartGameSetting() {
 			ai_config = AI_CONFIGURATION_BASIC;
 		} else if (document.getElementById('diff-normal').checked) {
 			ai_config = AI_CONFIGURATION_INTERMEDIATE;
+		} else if (document.getElementById('diff-hard').checked) {
+			ai_config = AI_CONFIGURATION_ADVANCED;
+		} else if (document.getElementById('diff-insane').checked) {
+			ai_config = AI_CONFIGURATION_ALL_SEEING;
 		}
 
 		if (document.getElementById('randomMap').checked) {

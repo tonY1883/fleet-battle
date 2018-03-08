@@ -86,3 +86,20 @@ var CV_ATTACK_COUNT = [
 	1,//t-adv
 	1//t-dis
 ];
+//Critical damage for different ships
+var CRITICAL_DAMAGE = [
+	2,//BB
+	1,//CV
+	1,//CA
+	1,//DD
+	1//AP
+];
+//size of ships
+//DO NOT modify unless tiles are also modified respectively.
+var SHIP_SIZE = [
+	4,//BB
+	4,//CV
+	3,//CA
+	2,//DD
+	3//AP
+];

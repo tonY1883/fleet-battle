@@ -9,6 +9,7 @@
 		<link href='style/common.css' rel='stylesheet' type='text/css'>
 		<link href='style/setting-box.css' rel='stylesheet' type='text/css'>
 		<link href='style/endgame-box.css' rel='stylesheet' type='text/css'>
+		<link href='style/stage-box.css' rel='stylesheet' type='text/css'>
 		<link href='style/modal_confirm.css' rel='stylesheet' type='text/css'>
 		<link href="https://fonts.googleapis.com/css?family=Tienne|Iceberg|Stardos+Stencil|Crimson+Text" rel="stylesheet">
 		<style>
@@ -54,7 +55,7 @@
 							<div class="SettingOption">
 								<label><input type="radio" name="diff" id="diff-easy"> Inferior</label>
 								<label><input type="radio" name="diff" id="diff-normal" checked> Equivalent</label>
-								<label><input type="radio" name="diff" id="diff-hard" disabled> Superior</label>
+								<label><input type="radio" name="diff" id="diff-hard"> Superior</label>
 								<label><input type="radio" name="diff" id="diff-insane" disabled> Overwhelming</label>
 							</div>
 						</div>
@@ -74,6 +75,13 @@
 					<!-- TODO any better alternatives?-->
 					<h1 id="EndingTitle"></h1>
 					<p id="EndingDescription"></p>
+				</div>
+			</div>
+		</div>
+		<div id="stage-box" class="modal">
+			<div class="modal-box ">
+				<div id="stage-box-content" class="modal-content-info">
+					<h1 id="info-text"></h1>
 				</div>
 			</div>
 		</div>
@@ -174,13 +182,14 @@
 		</main>
 		<footer>
 			<span id="version-code"></span><br>
-			© 2017 Yip Chung Nin<br>
+			© 2018 Yip Chung Nin<br>
 			<span id="github-link"></span>
 			<a href="https://github.com/tonY1883/fleet-battle" target="_blank"><img class="ImgLink" src="img/GitHub_Logo.png"></a>
 		</footer>
 	</body>
 	<script src="script/game-data.js"></script>
 	<script src="script/game-utils.js"></script>
+	<script src="script/game-graphic.js"></script>
 	<script src="script/game-initialize.js"></script>
 	<script src="script/game-ai.js"></script>
 	<script src="script/game-config.js"></script>

@@ -1,0 +1,25 @@
+#stage-box {
+	background-color: transparent;
+	display: block;
+	height: 0;
+}
+
+.modal-content-info {
+	position: relative;
+	top: -500px;
+	background-image: url("../img/background/old-paper-1957.png");
+	background-size: 100% 100%;
+	font-family: 'Crimson Text', serif;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	height: 15vh;
+	box-shadow: 5px 5px 2px #444444;
+	transition: 0.3s;
+}
+
+.modal-content-info h1 {
+	font-family: 'Crimson Text', serif;
+	font-weight: normal;
+	font-style: normal;
+}
