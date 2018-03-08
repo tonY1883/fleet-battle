@@ -36,7 +36,10 @@ var string = {
 	"game_objective_breakthrough": "Break through enemy resistance",
 	"game_objective_convoy": "Escort the transport ships to their destination",
 	"game_stage_aerial": "AERIAL COMBAT",
+	"game_stage_aerial_prompt_player": "Attack wing, ready to launch!",
+	"game_stage_aerial_prompt_enemy": "Enemy aircraft sighted!",
 	"game_stage_artillery": "FLEET ACTION",
+	"game_stage_artillery_prompt": "Enemy in range!",
 	"form_of_engagement_label": "Form of Engagement",
 	"form_of_engagement": [
 		"Parallel",
@@ -65,7 +68,7 @@ var string = {
 	"tutorial_confirm": "Greetings commander.<br>It seems that this is the first time you get hold of a fleet.<br>Would you like to read the manual first?",
 	"tutorial_confirm_yes": "Of course.",
 	"tutorial_confirm_no": "No, thanks.",
-	"version_code": "Version 0.8.2",
+    "version_code": "Version 0.9.0",
 	"github_link_text": "Source code, guides and other materials are available on",
 	"game_title": "Warships: Line of Battle"
 };
@@ -105,95 +108,397 @@ var img_url = {
 
 
 	],
-	"ship_tiles": [
+	"ship_tiles_default": [
 		[
 			[
-				"img/tiles/BB/sector_1_normal.png",
-				"img/tiles/BB/sector_2_normal.png",
-				"img/tiles/BB/sector_3_normal.png",
-				"img/tiles/BB/sector_4_normal.png"
+				"img/tiles/default/BB/sector_1_normal.png",
+				"img/tiles/default/BB/sector_2_normal.png",
+				"img/tiles/default/BB/sector_3_normal.png",
+				"img/tiles/default/BB/sector_4_normal.png"
 			],
 			[
-				"img/tiles/BB/sector_1_hit.png",
-				"img/tiles/BB/sector_2_hit.png",
-				"img/tiles/BB/sector_3_hit.png",
-				"img/tiles/BB/sector_4_hit.png"
+				"img/tiles/default/BB/sector_1_hit.png",
+				"img/tiles/default/BB/sector_2_hit.png",
+				"img/tiles/default/BB/sector_3_hit.png",
+				"img/tiles/default/BB/sector_4_hit.png"
 			],
 			[
-				"img/tiles/BB/sector_1_sunk.png",
-				"img/tiles/BB/sector_2_sunk.png",
-				"img/tiles/BB/sector_3_sunk.png",
-				"img/tiles/BB/sector_4_sunk.png"
+				"img/tiles/default/BB/sector_1_sunk.png",
+				"img/tiles/default/BB/sector_2_sunk.png",
+				"img/tiles/default/BB/sector_3_sunk.png",
+				"img/tiles/default/BB/sector_4_sunk.png"
 			]
 		],
 		[
 			[
-				"img/tiles/CV/sector_1_normal.png",
-				"img/tiles/CV/sector_2_normal.png",
-				"img/tiles/CV/sector_3_normal.png",
-				"img/tiles/CV/sector_4_normal.png"
+				"img/tiles/default/CV/sector_1_normal.png",
+				"img/tiles/default/CV/sector_2_normal.png",
+				"img/tiles/default/CV/sector_3_normal.png",
+				"img/tiles/default/CV/sector_4_normal.png"
 			],
 			[
-				"img/tiles/CV/sector_1_hit.png",
-				"img/tiles/CV/sector_2_hit.png",
-				"img/tiles/CV/sector_3_hit.png",
-				"img/tiles/CV/sector_4_hit.png"
+				"img/tiles/default/CV/sector_1_hit.png",
+				"img/tiles/default/CV/sector_2_hit.png",
+				"img/tiles/default/CV/sector_3_hit.png",
+				"img/tiles/default/CV/sector_4_hit.png"
 			],
 			[
-				"img/tiles/CV/sector_1_sunk.png",
-				"img/tiles/CV/sector_2_sunk.png",
-				"img/tiles/CV/sector_3_sunk.png",
-				"img/tiles/CV/sector_4_sunk.png"
+				"img/tiles/default/CV/sector_1_sunk.png",
+				"img/tiles/default/CV/sector_2_sunk.png",
+				"img/tiles/default/CV/sector_3_sunk.png",
+				"img/tiles/default/CV/sector_4_sunk.png"
 			]
 		],
 		[
 			[
-				"img/tiles/CA/sector_1_normal.png",
-				"img/tiles/CA/sector_2_normal.png",
-				"img/tiles/CA/sector_3_normal.png"
+				"img/tiles/default/CA/sector_1_normal.png",
+				"img/tiles/default/CA/sector_2_normal.png",
+				"img/tiles/default/CA/sector_3_normal.png"
 			],
 			[
-				"img/tiles/CA/sector_1_hit.png",
-				"img/tiles/CA/sector_2_hit.png",
-				"img/tiles/CA/sector_3_hit.png"
+				"img/tiles/default/CA/sector_1_hit.png",
+				"img/tiles/default/CA/sector_2_hit.png",
+				"img/tiles/default/CA/sector_3_hit.png"
 			],
 			[
-				"img/tiles/CA/sector_1_sunk.png",
-				"img/tiles/CA/sector_2_sunk.png",
-				"img/tiles/CA/sector_3_sunk.png"
+				"img/tiles/default/CA/sector_1_sunk.png",
+				"img/tiles/default/CA/sector_2_sunk.png",
+				"img/tiles/default/CA/sector_3_sunk.png"
 			]
 		],
 		[
 			[
-				"img/tiles/DD/sector_1_normal.png",
-				"img/tiles/DD/sector_2_normal.png"
+				"img/tiles/default/DD/sector_1_normal.png",
+				"img/tiles/default/DD/sector_2_normal.png"
 			],
 			[
-				"img/tiles/DD/sector_1_hit.png",
-				"img/tiles/DD/sector_2_hit.png"
+				"img/tiles/default/DD/sector_1_hit.png",
+				"img/tiles/default/DD/sector_2_hit.png"
 			],
 			[
-				"img/tiles/DD/sector_1_sunk.png",
-				"img/tiles/DD/sector_2_sunk.png"
+				"img/tiles/default/DD/sector_1_sunk.png",
+				"img/tiles/default/DD/sector_2_sunk.png"
 			]
 
 		],
 		[
 			[
-				"img/tiles/AP/sector_1_normal.png",
-				"img/tiles/AP/sector_2_normal.png",
-				"img/tiles/AP/sector_3_normal.png"
+				"img/tiles/default/AP/sector_1_normal.png",
+				"img/tiles/default/AP/sector_2_normal.png",
+				"img/tiles/default/AP/sector_3_normal.png"
 			],
 			[
-				"img/tiles/AP/sector_1_hit.png",
-				"img/tiles/AP/sector_2_hit.png",
-				"img/tiles/AP/sector_3_hit.png"
+				"img/tiles/default/AP/sector_1_hit.png",
+				"img/tiles/default/AP/sector_2_hit.png",
+				"img/tiles/default/AP/sector_3_hit.png"
 			],
 			[
-				"img/tiles/AP/sector_1_sunk.png",
-				"img/tiles/AP/sector_2_sunk.png",
-				"img/tiles/AP/sector_3_sunk.png"
+				"img/tiles/default/AP/sector_1_sunk.png",
+				"img/tiles/default/AP/sector_2_sunk.png",
+				"img/tiles/default/AP/sector_3_sunk.png"
 			]
+		]
+	],
+	"ship_tiles_nation": [
+		[
+			[
+				[
+					"img/tiles/jp/BB/sector_1_normal.png",
+					"img/tiles/jp/BB/sector_2_normal.png",
+					"img/tiles/jp/BB/sector_3_normal.png",
+					"img/tiles/jp/BB/sector_4_normal.png"
+				],
+				[
+					"img/tiles/jp/BB/sector_1_hit.png",
+					"img/tiles/jp/BB/sector_2_hit.png",
+					"img/tiles/jp/BB/sector_3_hit.png",
+					"img/tiles/jp/BB/sector_4_hit.png"
+				],
+				[
+					"img/tiles/jp/BB/sector_1_sunk.png",
+					"img/tiles/jp/BB/sector_2_sunk.png",
+					"img/tiles/jp/BB/sector_3_sunk.png",
+					"img/tiles/jp/BB/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/jp/CV/sector_1_normal.png",
+					"img/tiles/jp/CV/sector_2_normal.png",
+					"img/tiles/jp/CV/sector_3_normal.png",
+					"img/tiles/jp/CV/sector_4_normal.png"
+				],
+				[
+					"img/tiles/jp/CV/sector_1_hit.png",
+					"img/tiles/jp/CV/sector_2_hit.png",
+					"img/tiles/jp/CV/sector_3_hit.png",
+					"img/tiles/jp/CV/sector_4_hit.png"
+				],
+				[
+					"img/tiles/jp/CV/sector_1_sunk.png",
+					"img/tiles/jp/CV/sector_2_sunk.png",
+					"img/tiles/jp/CV/sector_3_sunk.png",
+					"img/tiles/jp/CV/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/jp/CA/sector_1_normal.png",
+					"img/tiles/jp/CA/sector_2_normal.png",
+					"img/tiles/jp/CA/sector_3_normal.png"
+				],
+				[
+					"img/tiles/jp/CA/sector_1_hit.png",
+					"img/tiles/jp/CA/sector_2_hit.png",
+					"img/tiles/jp/CA/sector_3_hit.png"
+				],
+				[
+					"img/tiles/jp/CA/sector_1_sunk.png",
+					"img/tiles/jp/CA/sector_2_sunk.png",
+					"img/tiles/jp/CA/sector_3_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/jp/DD/sector_1_normal.png",
+					"img/tiles/jp/DD/sector_2_normal.png"
+				],
+				[
+					"img/tiles/jp/DD/sector_1_hit.png",
+					"img/tiles/jp/DD/sector_2_hit.png"
+				],
+				[
+					"img/tiles/jp/DD/sector_1_sunk.png",
+					"img/tiles/jp/DD/sector_2_sunk.png"
+				]
+
+			],
+			[]
+		],
+		[
+			[
+				[
+					"img/tiles/us/BB/sector_1_normal.png",
+					"img/tiles/us/BB/sector_2_normal.png",
+					"img/tiles/us/BB/sector_3_normal.png",
+					"img/tiles/us/BB/sector_4_normal.png"
+				],
+				[
+					"img/tiles/us/BB/sector_1_hit.png",
+					"img/tiles/us/BB/sector_2_hit.png",
+					"img/tiles/us/BB/sector_3_hit.png",
+					"img/tiles/us/BB/sector_4_hit.png"
+				],
+				[
+					"img/tiles/us/BB/sector_1_sunk.png",
+					"img/tiles/us/BB/sector_2_sunk.png",
+					"img/tiles/us/BB/sector_3_sunk.png",
+					"img/tiles/us/BB/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/us/CV/sector_1_normal.png",
+					"img/tiles/us/CV/sector_2_normal.png",
+					"img/tiles/us/CV/sector_3_normal.png",
+					"img/tiles/us/CV/sector_4_normal.png"
+				],
+				[
+					"img/tiles/us/CV/sector_1_hit.png",
+					"img/tiles/us/CV/sector_2_hit.png",
+					"img/tiles/us/CV/sector_3_hit.png",
+					"img/tiles/us/CV/sector_4_hit.png"
+				],
+				[
+					"img/tiles/us/CV/sector_1_sunk.png",
+					"img/tiles/us/CV/sector_2_sunk.png",
+					"img/tiles/us/CV/sector_3_sunk.png",
+					"img/tiles/us/CV/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/us/CA/sector_1_normal.png",
+					"img/tiles/us/CA/sector_2_normal.png",
+					"img/tiles/us/CA/sector_3_normal.png"
+				],
+				[
+					"img/tiles/us/CA/sector_1_hit.png",
+					"img/tiles/us/CA/sector_2_hit.png",
+					"img/tiles/us/CA/sector_3_hit.png"
+				],
+				[
+					"img/tiles/us/CA/sector_1_sunk.png",
+					"img/tiles/us/CA/sector_2_sunk.png",
+					"img/tiles/us/CA/sector_3_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/us/DD/sector_1_normal.png",
+					"img/tiles/us/DD/sector_2_normal.png"
+				],
+				[
+					"img/tiles/us/DD/sector_1_hit.png",
+					"img/tiles/us/DD/sector_2_hit.png"
+				],
+				[
+					"img/tiles/us/DD/sector_1_sunk.png",
+					"img/tiles/us/DD/sector_2_sunk.png"
+				]
+
+			],
+			[]
+		],
+		[
+			[
+				[
+					"img/tiles/uk/BB/sector_1_normal.png",
+					"img/tiles/uk/BB/sector_2_normal.png",
+					"img/tiles/uk/BB/sector_3_normal.png",
+					"img/tiles/uk/BB/sector_4_normal.png"
+				],
+				[
+					"img/tiles/uk/BB/sector_1_hit.png",
+					"img/tiles/uk/BB/sector_2_hit.png",
+					"img/tiles/uk/BB/sector_3_hit.png",
+					"img/tiles/uk/BB/sector_4_hit.png"
+				],
+				[
+					"img/tiles/uk/BB/sector_1_sunk.png",
+					"img/tiles/uk/BB/sector_2_sunk.png",
+					"img/tiles/uk/BB/sector_3_sunk.png",
+					"img/tiles/uk/BB/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/uk/CV/sector_1_normal.png",
+					"img/tiles/uk/CV/sector_2_normal.png",
+					"img/tiles/uk/CV/sector_3_normal.png",
+					"img/tiles/uk/CV/sector_4_normal.png"
+				],
+				[
+					"img/tiles/uk/CV/sector_1_hit.png",
+					"img/tiles/uk/CV/sector_2_hit.png",
+					"img/tiles/uk/CV/sector_3_hit.png",
+					"img/tiles/uk/CV/sector_4_hit.png"
+				],
+				[
+					"img/tiles/uk/CV/sector_1_sunk.png",
+					"img/tiles/uk/CV/sector_2_sunk.png",
+					"img/tiles/uk/CV/sector_3_sunk.png",
+					"img/tiles/uk/CV/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/uk/CA/sector_1_normal.png",
+					"img/tiles/uk/CA/sector_2_normal.png",
+					"img/tiles/uk/CA/sector_3_normal.png"
+				],
+				[
+					"img/tiles/uk/CA/sector_1_hit.png",
+					"img/tiles/uk/CA/sector_2_hit.png",
+					"img/tiles/uk/CA/sector_3_hit.png"
+				],
+				[
+					"img/tiles/uk/CA/sector_1_sunk.png",
+					"img/tiles/uk/CA/sector_2_sunk.png",
+					"img/tiles/uk/CA/sector_3_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/uk/DD/sector_1_normal.png",
+					"img/tiles/uk/DD/sector_2_normal.png"
+				],
+				[
+					"img/tiles/uk/DD/sector_1_hit.png",
+					"img/tiles/uk/DD/sector_2_hit.png"
+				],
+				[
+					"img/tiles/uk/DD/sector_1_sunk.png",
+					"img/tiles/uk/DD/sector_2_sunk.png"
+				]
+
+			],
+			[]
+		],
+		[
+			[
+				[
+					"img/tiles/de/BB/sector_1_normal.png",
+					"img/tiles/de/BB/sector_2_normal.png",
+					"img/tiles/de/BB/sector_3_normal.png",
+					"img/tiles/de/BB/sector_4_normal.png"
+				],
+				[
+					"img/tiles/de/BB/sector_1_hit.png",
+					"img/tiles/de/BB/sector_2_hit.png",
+					"img/tiles/de/BB/sector_3_hit.png",
+					"img/tiles/de/BB/sector_4_hit.png"
+				],
+				[
+					"img/tiles/de/BB/sector_1_sunk.png",
+					"img/tiles/de/BB/sector_2_sunk.png",
+					"img/tiles/de/BB/sector_3_sunk.png",
+					"img/tiles/de/BB/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/de/CV/sector_1_normal.png",
+					"img/tiles/de/CV/sector_2_normal.png",
+					"img/tiles/de/CV/sector_3_normal.png",
+					"img/tiles/de/CV/sector_4_normal.png"
+				],
+				[
+					"img/tiles/de/CV/sector_1_hit.png",
+					"img/tiles/de/CV/sector_2_hit.png",
+					"img/tiles/de/CV/sector_3_hit.png",
+					"img/tiles/de/CV/sector_4_hit.png"
+				],
+				[
+					"img/tiles/de/CV/sector_1_sunk.png",
+					"img/tiles/de/CV/sector_2_sunk.png",
+					"img/tiles/de/CV/sector_3_sunk.png",
+					"img/tiles/de/CV/sector_4_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/de/CA/sector_1_normal.png",
+					"img/tiles/de/CA/sector_2_normal.png",
+					"img/tiles/de/CA/sector_3_normal.png"
+				],
+				[
+					"img/tiles/de/CA/sector_1_hit.png",
+					"img/tiles/de/CA/sector_2_hit.png",
+					"img/tiles/de/CA/sector_3_hit.png"
+				],
+				[
+					"img/tiles/de/CA/sector_1_sunk.png",
+					"img/tiles/de/CA/sector_2_sunk.png",
+					"img/tiles/de/CA/sector_3_sunk.png"
+				]
+			],
+			[
+				[
+					"img/tiles/de/DD/sector_1_normal.png",
+					"img/tiles/de/DD/sector_2_normal.png"
+				],
+				[
+					"img/tiles/de/DD/sector_1_hit.png",
+					"img/tiles/de/DD/sector_2_hit.png"
+				],
+				[
+					"img/tiles/de/DD/sector_1_sunk.png",
+					"img/tiles/de/DD/sector_2_sunk.png"
+				]
+
+			],
+			[]
 		]
 	]
 };
@@ -202,6 +507,9 @@ var sfx_url = {
 	"gun_fire": "sound/sfx/gunfire.ogg",
 	"explosion": "sound/sfx/explosion.ogg",
 	"plane_attack": "sound/sfx/plane.ogg",
+	"plane_attack_enemy": "sound/sfx/plane-aa-gun.ogg",
+	"plane_start_engine": "sound/sfx/plane-start-engine.ogg",
 	"explosion_water": "sound/sfx/explosion-water.ogg",
-	"explosion_distant": "sound/sfx/explosion-distant.ogg"
+	"explosion_distant": "sound/sfx/explosion-distant.ogg",
+	"buzzer": "sound/sfx/buzzer-alarm.ogg"
 };

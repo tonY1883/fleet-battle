@@ -21,6 +21,10 @@ var AI_CONFIGURATION_ADVANCED = 2;
 var AI_CONFIGURATION_ALL_SEEING = 3;
 
 
+//Debug symbols
+var attackCount = 0;
+var attackHit = 0;
+
 /**
  * Codes for computer ship placing
  */
@@ -98,7 +102,7 @@ function shipPlacableAi(x, y, type, course) {
 		if ((x + ship_size) < map_size && y < map_size) {
 			//check if another ship already exsist
 			for (var i = 0; i < ship_size; i++) {
-				if (document.getElementById("monitorRight").querySelector("[x='" + (x + i) + "'][y='" + y + "']").hasAttribute("placed")) {
+				if (getMonitorGrid("monitorRight", (x + i), y).hasAttribute("placed")) {
 					return false;
 				}
 			}
@@ -109,7 +113,7 @@ function shipPlacableAi(x, y, type, course) {
 	} else if (course == SHIP_COURSE_HORIZONTAL) {
 		if ((y + ship_size) < map_size && x < map_size) {
 			for (var i = 0; i < ship_size; i++) {
-				if (document.getElementById("monitorRight").querySelector("[y='" + (y + i) + "'][x='" + x + "']").hasAttribute("placed")) {
+				if (getMonitorGrid("monitorRight", x, (y + i)).hasAttribute("placed")) {
 					return false;
 				}
 			}
@@ -133,7 +137,7 @@ function shipPlacementBasic() {
 		//place the ship
 		if (course == SHIP_COURSE_VERTICAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[x='" + (x + i) + "'][y='" + y + "']");
+				var tGrid = getMonitorGrid("monitorRight", (x + i), y);
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -141,7 +145,7 @@ function shipPlacementBasic() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTile";
 					tGrid.setAttribute('class', classes);
@@ -149,7 +153,7 @@ function shipPlacementBasic() {
 			}
 		} else if (course == SHIP_COURSE_HORIZONTAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[y='" + (y + i) + "'][x='" + x + "']");
+				var tGrid = getMonitorGrid("monitorRight", x, (y + i));
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -157,7 +161,7 @@ function shipPlacementBasic() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTileHorizontal";
 					tGrid.setAttribute('class', classes);
@@ -228,7 +232,7 @@ function shipPlacementIntermediate() {
 	if (shipPlacableAi(x, y, type, course)) {
 		if (course == SHIP_COURSE_VERTICAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[x='" + (x + i) + "'][y='" + y + "']");
+				var tGrid = getMonitorGrid("monitorRight", (x + i), y);
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -236,7 +240,7 @@ function shipPlacementIntermediate() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTile";
 					tGrid.setAttribute('class', classes);
@@ -244,7 +248,7 @@ function shipPlacementIntermediate() {
 			}
 		} else if (course == SHIP_COURSE_HORIZONTAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[y='" + (y + i) + "'][x='" + x + "']");
+				var tGrid = getMonitorGrid("monitorRight", x, (y + i));
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -252,7 +256,7 @@ function shipPlacementIntermediate() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTileHorizontal";
 					tGrid.setAttribute('class', classes);
@@ -330,7 +334,7 @@ function shipPlacementAdvanced() {
 	if (shipPlacableAi(x, y, type, course)) {
 		if (course == SHIP_COURSE_VERTICAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[x='" + (x + i) + "'][y='" + y + "']");
+				var tGrid = getMonitorGrid("monitorRight", (x + i), y);
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -338,7 +342,7 @@ function shipPlacementAdvanced() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTile";
 					tGrid.setAttribute('class', classes);
@@ -346,7 +350,7 @@ function shipPlacementAdvanced() {
 			}
 		} else if (course == SHIP_COURSE_HORIZONTAL) {
 			for (var i = 0; i < ship_size; i++) {
-				var tGrid = document.getElementById("monitorRight").querySelector("[y='" + (y + i) + "'][x='" + x + "']");
+				var tGrid = getMonitorGrid("monitorRight", x, (y + i));
 				tGrid.setAttribute("placed", "true");
 				tGrid.setAttribute("ship-class", type);
 				tGrid.setAttribute("head-x", x);
@@ -354,7 +358,7 @@ function shipPlacementAdvanced() {
 				tGrid.setAttribute("ship-bearing", course);
 				tGrid.setAttribute("sector", i);
 				if (!FOG_OF_WAR) {
-					tGrid.style.backgroundImage = "url('" + img_url.ship_tiles[type][0][i] + "')";
+					tGrid.style.backgroundImage = "url('" + getShipTileImagesURL(player_2_ship_set, type, SHIP_STATUS_INTACT)[i] + "')";
 					var classes = tGrid.getAttribute('class');
 					classes = classes + " ShipsTileHorizontal";
 					tGrid.setAttribute('class', classes);
@@ -445,7 +449,7 @@ function attackBasic() {
 		}
 		switch (d) {
 			case 0:
-				if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+				if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 					x = lastHitCoorX + 1;
 					y = lastHitCoorY;
 				} else {
@@ -456,7 +460,7 @@ function attackBasic() {
 
 				break;
 			case 1:
-				if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+				if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 					x = lastHitCoorX - 1;
 					y = lastHitCoorY;
 				} else {
@@ -466,7 +470,7 @@ function attackBasic() {
 				}
 				break;
 			case 2:
-				if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+				if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 					y = lastHitCoorY - 1;
 					x = lastHitCoorX;
 				} else {
@@ -476,7 +480,7 @@ function attackBasic() {
 				}
 				break;
 			case 3:
-				if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+				if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 					y = lastHitCoorY + 1;
 					x = lastHitCoorX;
 				} else {
@@ -494,7 +498,7 @@ function attackBasic() {
 	}
 
 	//see if available
-	var tGrid = document.getElementById("monitorLeft").querySelector("[y='" + y + "'][x='" + x + "']");
+	var tGrid = getMonitorGrid("monitorLeft", x, y);
 	if (tGrid == null || tGrid.hasAttribute("sunk")) {
 		//current target destroyed
 		lastHit = false;
@@ -532,7 +536,7 @@ function attackIntermediate() {
 			}
 			switch (d) {
 				case 0:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					} else {
@@ -544,7 +548,7 @@ function attackIntermediate() {
 
 					break;
 				case 1:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					} else {
@@ -555,7 +559,7 @@ function attackIntermediate() {
 					}
 					break;
 				case 2:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 						y = lastHitCoorY - 1;
 						x = lastHitCoorX;
 					} else {
@@ -566,7 +570,7 @@ function attackIntermediate() {
 					}
 					break;
 				case 3:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 						y = lastHitCoorY + 1;
 						x = lastHitCoorX;
 					} else {
@@ -584,7 +588,7 @@ function attackIntermediate() {
 				d = RNG(0, 3);
 				switch (d) {
 					case 0:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+						if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 							x = lastHitCoorX + 1;
 							y = lastHitCoorY;
 						} else {
@@ -596,7 +600,7 @@ function attackIntermediate() {
 
 						break;
 					case 1:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+						if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 							x = lastHitCoorX - 1;
 							y = lastHitCoorY;
 						} else {
@@ -607,7 +611,7 @@ function attackIntermediate() {
 						}
 						break;
 					case 2:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+						if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 							y = lastHitCoorY - 1;
 							x = lastHitCoorX;
 						} else {
@@ -618,7 +622,7 @@ function attackIntermediate() {
 						}
 						break;
 					case 3:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+						if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 							y = lastHitCoorY + 1;
 							x = lastHitCoorX;
 						} else {
@@ -635,7 +639,7 @@ function attackIntermediate() {
 					//flip the direction
 					switch (d) {
 						case 0:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + lockedCoorY + "'][x='" + (lockedCoorX - 1) + "']") != null) {
+							if (getMonitorGrid("monitorLeft", (lockedCoorX - 1), lockedCoorY) !== null) {
 								x = lockedCoorX - 1;
 								y = lockedCoorY;
 								d = 1;
@@ -643,21 +647,21 @@ function attackIntermediate() {
 
 							break;
 						case 1:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + lockedCoorY + "'][x='" + (lockedCoorX + 1) + "']") != null) {
+							if (getMonitorGrid("monitorLeft", (lockedCoorX + 1), lockedCoorY) !== null) {
 								x = lockedCoorX + 1;
 								y = lockedCoorY;
 								d = 0;
 							}
 							break;
 						case 2:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + (lockedCoorY + 1) + "'][x='" + lockedCoorX + "']") != null) {
+							if (getMonitorGrid("monitorLeft", lockedCoorX, (lockedCoorY + 1)) !== null) {
 								y = lockedCoorY + 1;
 								x = lockedCoorX;
 								d = 3;
 							}
 							break;
 						case 3:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + (lockedCoorY - 1) + "'][x='" + lockedCoorX + "']") != null) {
+							if (getMonitorGrid("monitorLeft", lockedCoorX, (lockedCoorY - 1)) !== null) {
 								y = lockedCoorY - 1;
 								x = lockedCoorX;
 								d = 2;
@@ -703,7 +707,7 @@ function attackIntermediate() {
 			d = RNG(0, 3);
 			switch (d) {
 				case 0:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					} else {
@@ -714,7 +718,7 @@ function attackIntermediate() {
 
 					break;
 				case 1:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					} else {
@@ -724,7 +728,7 @@ function attackIntermediate() {
 					}
 					break;
 				case 2:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 						y = lastHitCoorY - 1;
 						x = lastHitCoorX;
 					} else {
@@ -734,7 +738,7 @@ function attackIntermediate() {
 					}
 					break;
 				case 3:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 						y = lastHitCoorY + 1;
 						x = lastHitCoorX;
 					} else {
@@ -761,8 +765,8 @@ function attackIntermediate() {
 	}
 
 	//see if available
-	var tGrid = document.getElementById("monitorLeft").querySelector("[y='" + y + "'][x='" + x + "']");
-	if (tGrid == null || tGrid.hasAttribute("sunk") || (!target_locked && tGrid.hasAttribute("hit"))) {
+	var tGrid = getMonitorGrid("monitorLeft", x, y);
+	if (tGrid == null || tGrid.hasAttribute("sunk") || (!target_locked && tGrid.hasAttribute("hit_count"))) {
 		//if no, do it again
 		attackIntermediate();
 	} else {
@@ -779,6 +783,9 @@ function attackIntermediate() {
 /**
  * Targeting code for the Advanced AI
  */
+var probMap = new Array();
+var targetSunkCount = [0, 0, 0, 0, 0];
+
 //TODO guess next ship base on distribution of known ships. Possible?
 function attackAdvanced() {
 	if (target_locked) {
@@ -792,7 +799,7 @@ function attackAdvanced() {
 			}
 			switch (d) {
 				case 0:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					} else {
@@ -804,7 +811,7 @@ function attackAdvanced() {
 
 					break;
 				case 1:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					} else {
@@ -815,7 +822,7 @@ function attackAdvanced() {
 					}
 					break;
 				case 2:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 						y = lastHitCoorY - 1;
 						x = lastHitCoorX;
 					} else {
@@ -826,7 +833,7 @@ function attackAdvanced() {
 					}
 					break;
 				case 3:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 						y = lastHitCoorY + 1;
 						x = lastHitCoorX;
 					} else {
@@ -839,12 +846,16 @@ function attackAdvanced() {
 			}
 
 		} else if (lastLastHit) {
-			if (hitCount < 2) {
+			if (hitCount < 4) {
 				//wrong direction
-				d = RNG(0, 3);
+				d++;
+				if (d > 3) {
+					d = 0;
+				}
+
 				switch (d) {
 					case 0:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+						if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 							x = lastHitCoorX + 1;
 							y = lastHitCoorY;
 						} else {
@@ -856,7 +867,7 @@ function attackAdvanced() {
 
 						break;
 					case 1:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+						if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 							x = lastHitCoorX - 1;
 							y = lastHitCoorY;
 						} else {
@@ -867,7 +878,7 @@ function attackAdvanced() {
 						}
 						break;
 					case 2:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+						if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 							y = lastHitCoorY - 1;
 							x = lastHitCoorX;
 						} else {
@@ -878,7 +889,7 @@ function attackAdvanced() {
 						}
 						break;
 					case 3:
-						if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+						if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 							y = lastHitCoorY + 1;
 							x = lastHitCoorX;
 						} else {
@@ -890,115 +901,86 @@ function attackAdvanced() {
 						break;
 				}
 			} else {
-				//MUST.BE.NEAR.BY!
-				if (hitCount < 4) {
-					//flip the direction
-					switch (d) {
-						case 0:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + lockedCoorY + "'][x='" + (lockedCoorX - 1) + "']") != null) {
-								x = lockedCoorX - 1;
-								y = lockedCoorY;
-								d = 1;
-							}
-
-							break;
-						case 1:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + lockedCoorY + "'][x='" + (lockedCoorX + 1) + "']") != null) {
-								x = lockedCoorX + 1;
-								y = lockedCoorY;
-								d = 0;
-							}
-							break;
-						case 2:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + (lockedCoorY + 1) + "'][x='" + lockedCoorX + "']") != null) {
-								y = lockedCoorY + 1;
-								x = lockedCoorX;
-								d = 3;
-							}
-							break;
-						case 3:
-							if (document.getElementById("monitorLeft").querySelector("[y='" + (lockedCoorY - 1) + "'][x='" + lockedCoorX + "']") != null) {
-								y = lockedCoorY - 1;
-								x = lockedCoorX;
-								d = 2;
-							}
-							break;
-					}
-				} else {
-					//probaly a battleship. try to hit it twice in every sector.
-					//which means we simply flip the dirction and don't touch the coordinates.
-					switch (d) {
-						case 0:
-							x = lastHitCoorX;
-							y = lastHitCoorY;
-							d = 1;
+				//probaly a battleship. try to hit it twice in every sector.
+				//which means we simply flip the dirction and don't touch the coordinates.
+				switch (d) {
+					case 0:
+						x = lastHitCoorX;
+						y = lastHitCoorY;
+						d = 1;
 
 
-							break;
-						case 1:
-							x = lastHitCoorX;
-							y = lastHitCoorY;
-							d = 0;
+						break;
+					case 1:
+						x = lastHitCoorX;
+						y = lastHitCoorY;
+						d = 0;
 
-							break;
-						case 2:
-							x = lastHitCoorX;
-							y = lastHitCoorY;
+						break;
+					case 2:
+						x = lastHitCoorX;
+						y = lastHitCoorY;
 
-							d = 3;
+						d = 3;
 
-							break;
-						case 3:
-							x = lastHitCoorX;
-							y = lastHitCoorY;
-							d = 2;
+						break;
+					case 3:
+						x = lastHitCoorX;
+						y = lastHitCoorY;
+						d = 2;
 
-							break;
-					}
+						break;
 				}
 
 			}
 		} else if (lastHitCoorX == lockedCoorX && lastHitCoorY == lockedCoorY) {
 			//wrong direction
-			d = RNG(0, 3);
+			d++;
+			if (d > 3) {
+				d = 0;
+			}
 			switch (d) {
 				case 0:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX + 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX + 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					} else {
 						//flip direction
+						d = 1;
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					}
 
 					break;
 				case 1:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + lastHitCoorY + "'][x='" + (lastHitCoorX - 1) + "']") != null) {
+					if (getMonitorGrid("monitorLeft", (lastHitCoorX - 1), lastHitCoorY) !== null) {
 						x = lastHitCoorX - 1;
 						y = lastHitCoorY;
 					} else {
 						//flip direction
+						d = 0;
 						x = lastHitCoorX + 1;
 						y = lastHitCoorY;
 					}
 					break;
 				case 2:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY - 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY - 1)) !== null) {
 						y = lastHitCoorY - 1;
 						x = lastHitCoorX;
 					} else {
 						//flip direction
+						d = 3;
 						x = lastHitCoorX;
 						y = lastHitCoorY + 1;
 					}
 					break;
 				case 3:
-					if (document.getElementById("monitorLeft").querySelector("[y='" + (lastHitCoorY + 1) + "'][x='" + lastHitCoorX + "']") != null) {
+					if (getMonitorGrid("monitorLeft", lastHitCoorX, (lastHitCoorY + 1)) !== null) {
 						y = lastHitCoorY + 1;
 						x = lastHitCoorX;
 					} else {
 						//flip direction
+						d = 2;
 						x = lastHitCoorX;
 						y = lastHitCoorY - 1;
 					}
@@ -1033,36 +1015,32 @@ function attackAdvanced() {
 
 
 	} else {
-		//cycle between the areas
-		switch (q) {
-			case 0:
-				x = RNG(0, Math.round(map_size / 2));
-				y = RNG(0, Math.round(map_size / 2));
-				break;
-			case 1:
-				x = RNG(Math.round(map_size / 2), map_size);
-				y = RNG(0, Math.round(map_size / 2));
-				break;
-			case 2:
-				x = RNG(0, Math.round(map_size / 2));
-				y = RNG(Math.round(map_size / 2), map_size);
-				break;
-			case 3:
-				x = RNG(Math.round(map_size / 2), map_size);
-				y = RNG(Math.round(map_size / 2), map_size);
-				break;
+		updateProbMap();
+		var p = 0;
+		var grids = [];
+		for (var q = 0; q < map_size; q++) {
+			for (var r = 0; r < map_size; r++) {
+				if (probMap[q][r] > p) {
+					p = probMap[q][r];
+				}
+			}
 		}
-		q = q + 1;
-		if (q > 3) {
-			q = 0;
+		for (var q = 0; q < map_size; q++) {
+			for (var r = 0; r < map_size; r++) {
+				if (probMap[q][r] === p) {
+					grids.push([q, r]);
+				}
+			}
 		}
+		var target = randomItemFromArray(grids);
+		x = target[0];
+		y = target[1];
 	}
-
 	//see if available
-	var tGrid = document.getElementById("monitorLeft").querySelector("[y='" + y + "'][x='" + x + "']");
-	if (tGrid == null || tGrid.hasAttribute("sunk") || (!target_locked && tGrid.hasAttribute("hit"))) {
+	var tGrid = getMonitorGrid("monitorLeft", x, y);
+	if (tGrid == null || tGrid.hasAttribute("sunk") || (!target_locked && tGrid.hasAttribute("hit_count"))) {
 		//if no, do it again
-		attackIntermediate();
+		attackAdvanced();
 	} else {
 		lastLastHit = lastHit; //backup
 		player_2_attack_count = player_2_attack_count - 1;
@@ -1120,6 +1098,8 @@ function attackAllSeeing() {
  * TODO can this be fixed?
  */
 function onAttackResult(hit) {
+	attackCount = attackCount + 1;
+	attackHit = attackHit + (hit ? 1 : 0);
 	lastHit = hit;
 	switch (ai_config) {
 		case AI_CONFIGURATION_BASIC:
@@ -1129,7 +1109,6 @@ function onAttackResult(hit) {
 			}
 			break;
 		case AI_CONFIGURATION_INTERMEDIATE:
-		case AI_CONFIGURATION_ADVANCED:
 			if (lastHit) {
 				lastHitCoorY = y;
 				lastHitCoorX = x;
@@ -1147,10 +1126,187 @@ function onAttackResult(hit) {
 				}
 			}
 			break;
+		case AI_CONFIGURATION_ADVANCED:
+			if (lastHit) {
+				lastHitCoorY = y;
+				lastHitCoorX = x;
+				hitCount = hitCount + 1;
+				//lock on the target if hasn't
+				if (!target_locked) {
+					target_locked = true;
+					lockedCoorY = y;
+					lockedCoorX = x;
+				}
+				//or else if it is destroyed, unlock it.
+				if (shipDestroyed("monitorLeft", x, y)) {
+					target_locked = false;
+					hitCount = 0;
+					targetSunkCount[getShipClass(getMonitorGrid("monitorLeft", x, y))]++;
+					updateProbMap();
+				}
+			}
+			break;
 		case AI_CONFIGURATION_ALL_SEEING:
 			//I don't need you to tell me if I hit. I always know.
 			break;
 		default:
 			onConfigError();
 	}
+}
+
+/**
+ * Functions for Advanced AI
+ */
+function createProbMap() {
+	probMap = new Array();
+	for (var q = 0; q < map_size; q++) {
+		var row = new Array();
+		for (var r = 0; r < map_size; r++) {
+			row.push(0);
+		}
+		probMap.push(row);
+	}
+}
+
+function updateProbMap() {
+	createProbMap();
+	for (var q = 0; q < map_size; q++) {
+		for (var r = 0; r < map_size; r++) {
+			for (var s = 0; s < getPlayerShipCount(PLAYER_1); s++) {
+				//Triple for loops. Fast enough, I guess.
+				if (game_mode === GAME_MODE_CONVOY) {
+					if (targetSunkCount[SHIP_CLASS_AP] < max_ap_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_AP, SHIP_COURSE_HORIZONTAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_AP] < max_ap_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_AP, SHIP_COURSE_VERTICAL)) {
+							probMap[q][r]++;
+						}
+					}
+				} else if (game_mode === GAME_MODE_BREAKTHROUGH && SPECIFIC_CLASS_INTERCEPT_BREAKTHROUGH) {
+					if (shipExistPossible(q, r, ship_class_target, SHIP_COURSE_HORIZONTAL)) {
+						probMap[q][r]++;
+					}
+					if (shipExistPossible(q, r, ship_class_target, SHIP_COURSE_VERTICAL)) {
+						probMap[q][r]++;
+					}
+				} else {
+					if (targetSunkCount[SHIP_CLASS_BB] < max_bb_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_BB, SHIP_COURSE_HORIZONTAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_BB] < max_bb_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_BB, SHIP_COURSE_VERTICAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_CV] < max_cv_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_CV, SHIP_COURSE_HORIZONTAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_CV] < max_cv_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_CV, SHIP_COURSE_VERTICAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_CA] < max_ca_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_CA, SHIP_COURSE_HORIZONTAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_CA] < max_ca_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_CA, SHIP_COURSE_VERTICAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_DD] < max_dd_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_DD, SHIP_COURSE_HORIZONTAL)) {
+							probMap[q][r]++;
+						}
+					}
+					if (targetSunkCount[SHIP_CLASS_DD] < max_dd_count) {
+						if (shipExistPossible(q, r, SHIP_CLASS_DD, SHIP_COURSE_VERTICAL)) {
+							probMap[q][r]++;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+function shipExistPossible(x, y, type, course) {
+	var ship_size;
+	switch (type) {
+		case SHIP_CLASS_BB:
+		case SHIP_CLASS_CV:
+			ship_size = 4;
+			break;
+		case SHIP_CLASS_CA:
+			ship_size = 3;
+			break;
+		case SHIP_CLASS_DD:
+			ship_size = 2;
+			break;
+		case SHIP_CLASS_AP:
+			ship_size = 3;
+			break;
+	}
+	if (course === SHIP_COURSE_VERTICAL) {
+		//check if over edge of map
+		if ((x + ship_size) < map_size && y < map_size) {
+			//check if another ship already exsist
+			for (var i = 0; i < ship_size; i++) {
+				if (getMonitorGrid("monitorLeft", (x + i), y).hasAttribute("sunk") || getMonitorGrid("monitorLeft", (x + i), y).hasAttribute("hit_count")) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	} else if (course === SHIP_COURSE_HORIZONTAL) {
+		if ((y + ship_size) < map_size && x < map_size) {
+			for (var i = 0; i < ship_size; i++) {
+				if (getMonitorGrid("monitorLeft", x, (y + i)).hasAttribute("sunk") || getMonitorGrid("monitorLeft", x, (y + i)).hasAttribute("hit_count")) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}
+
+/**
+ * Debug method - not called in the script
+ */
+function getAIStatistic() {
+	var ai;
+	switch (ai_config) {
+		case AI_CONFIGURATION_BASIC:
+			ai = "Inferior";
+			break;
+		case AI_CONFIGURATION_INTERMEDIATE:
+			ai = "Equivalent";
+			break;
+		case AI_CONFIGURATION_ADVANCED:
+			ai = "Superior";
+			break;
+		case AI_CONFIGURATION_ALL_SEEING:
+			ai = "Overwhelming";
+			break;
+		default:
+			onConfigError();
+	}
+	console.log("Current AI: " + ai);
+	console.log("Attack launched: " + attackCount);
+	console.log("Attack hit: " + attackHit);
+
 }
